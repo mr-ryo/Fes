@@ -1,0 +1,41 @@
+//-===== mixin =====
+
+mixin styleSheet(path)
+  link(rel="stylesheet" href=path)
+
+mixin icon(path, size)
+  link(rel="icon" type="image/png" href!=(directory + path) sizes=size)
+
+//-===== meta =====
+
+//Char Set
+meta(charset="UTF-8")
+
+//ViewPort Setting
+meta(name="viewport" content="width=device-width, initial-scale=1")
+
+//Title
+title lullaby-starter
+
+//Page Setting
+meta(http-equiv="X-UA-Compatible" content="IE=edge")
+meta(name="description" content="")
+meta(meta name="keywords" content="")
+
+//OGP
+//- meta(property="og:title" content!="<?php bloginfo('name') ?>")
+//- meta(property="og:description" content="")
+//- meta(property="og:image" content!=directory +"images/common/")
+//- meta(property="og:type" content="website")
+//- meta(name="twitter:card" content="summary")
+//- meta(name="twitter:site" content="")
+
+//Add to homescreen
+//- meta(name="mobile-web-app-capable" content="yes")
+//- link(rel="apple-touch-icon" sizes="57x57" href!=directory +"images/favicons/apple-touch-icon_57x57.png")
+//- +icon("images/favicons/favicon_16x16.png", "16x16")
+//- +icon("images/favicons/favicon_32x32.png", "32x32")
+//- +icon("images/favicons/favicon_64x64.png", "64x64")
+
+//CSS Setting
++styleSheet("css/style.css")
