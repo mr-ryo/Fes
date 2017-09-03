@@ -2,6 +2,7 @@
 * ---JSON---
 */
 import json from '../config/question.json';
+
 /*
 * ---Library---
 */
@@ -18,6 +19,7 @@ const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
+
 /*
 * ---初期設定---
 */
@@ -98,19 +100,20 @@ masterDraw();
 
 $(window).on('keydown', (e) => {
   switch (e.keyCode) {
-    case KEY_LEFT:// ←
+    case KEY_LEFT:
+      slide[index].recesEvent();
       break;
-    case KEY_UP:// ↑
+    case KEY_UP:
       if (index > 0) {
         --index;
         move();
       }// end if
       break;
-    case KEY_RIGHT:// →
+    case KEY_RIGHT:
       slide[index].progEvent();
       break;
-    case KEY_DOWN:// ↓
-      if (index < SLIDE_LEN) {
+    case KEY_DOWN:
+      if (index < SLIDE_LEN - 1) {
         ++index;
         move();
       }// end if

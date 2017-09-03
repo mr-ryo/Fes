@@ -1,3 +1,4 @@
+import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
@@ -13,6 +14,17 @@ export default class Slide {
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
     });// end timestamp
+    this.soundManager = new SoundManager({
+    });// end soundManager
+
+    this.resource = {
+    };// end resource
+
+    this.audio = {
+      numberCall: '../sounds/se_maoudamashii_onepoint28.mp3',
+      sentenceCall: '../sounds/se_maoudamashii_onepoint22.mp3',
+      correctCall: '../sounds/se_maoudamashii_onepoint07.mp3',
+    }// end audio
   }// end constructor
 
   addQuestion (opts = {}) {
@@ -21,27 +33,6 @@ export default class Slide {
       correct: opts.a
     });// end Question
   }// end addQuestion
-
-  progEvent () {
-    if (this.event < 4) {
-      ++this.event;
-
-      switch (this.event) {
-        case 4:
-          break;
-        case 3:
-          this.startCount();
-          this.addTime();
-          break;
-        case 2:
-          break;
-        case 1:
-          break;
-        default:
-          break;
-      }// end switch
-    }// end if
-  }// end conductor
 
   addSlide (wrap) {
     wrap.append('<div class="slide"></div>');
@@ -57,6 +48,42 @@ export default class Slide {
 
     window.requestAnimationFrame(loop);
   }// end addTime
+
+  progEvent () {
+    if (this.event < 4) {
+      ++this.event;
+
+      switch (this.event) {
+        case 4:
+          this.soundManager.play(this.audio.correctCall, {
+            volume: 0.1
+          });// end play
+          break;
+        case 3:
+          this.startCount();
+          this.addTime();
+          break;
+        case 2:
+          this.soundManager.play(this.audio.sentenceCall, {
+            volume: 0.1
+          });// end play
+          break;
+        case 1:
+          this.soundManager.play(this.audio.numberCall, {
+            volume: 0.1
+          });// end play
+          break;
+        default:
+          break;
+      }// end switch
+    }// end if
+  }// end progEvent
+
+  recesEvent () {
+    if (this.event > 0) {
+      --this.event;
+    }// end if
+  }// recesEvent
 
   startCount () {
     this.timestamp.startCount();
@@ -80,4 +107,4 @@ export default class Slide {
 
     return reserv.reverse();
   }// end getEvent
-};// end Sample
+};// end Slide

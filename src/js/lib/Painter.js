@@ -1,3 +1,5 @@
+const fontFamily = 'Yu Gothic';
+
 export default class Painter {
   constructor (opts = {}) {
     this.canvas = opts.canvas;
@@ -10,7 +12,7 @@ export default class Painter {
     for (let i = 0, size = reserv.length; i < size; ++i) {
       this.alignText(reserv[i], {
         x: 10,
-        y: 10 * (i + 1)
+        y: 16 * (i + 1)
       });// end alignText
     }// end for
   }// end drawing
@@ -31,6 +33,7 @@ export default class Painter {
     const x = isNaN(opts.x) ? 0 : opts.x;
     const y = isNaN(opts.y) ? 0 : opts.y;
 
+    this.ctx.font = '16px '+ fontFamily;
     this.ctx.fillStyle = 'rgb(255, 255, 255)';
     this.ctx.fillText(str, x, y);
   }// end alignText
