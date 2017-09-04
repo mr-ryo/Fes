@@ -27,7 +27,6 @@ const RESOURCE_PATH = '../images/';
 */
 const wrap = $('.slideWrap');
 const slide = [];
-const questions = [];
 const painter = new Painter({
   canvas: $('.canvas').get(0),
   w: $(window).width(),
@@ -40,6 +39,7 @@ let index = 0;
 * ---関数---
 */
 const orderQuestion = (array, volume) => {
+  const questions = [];
   let rand;
   let flg;
 

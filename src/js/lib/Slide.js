@@ -12,6 +12,7 @@ export default class Slide {
     this.num = opts.num;
     this.event = 0;
     this.timer = 0;
+
     this.question;
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
@@ -110,7 +111,7 @@ export default class Slide {
           method: 'align',
           x: 0.5,
           y: 0.5,
-          fit: 'width'
+          fit: 'height'
         });// end push
       case 3:
         reserv.push(this.timer);

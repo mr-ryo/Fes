@@ -1,12 +1,59 @@
 const fontFamily = 'Yu Gothic';
 const fontSize = 16;
 
+const RESOURCE_PATH = '../images/';
+const COMMON_PATH = 'common/';
+const NUMBERS_PATH = 'numbers/';
+const ALPHABETS_PATH = 'alphabets/';
+
 export default class Painter {
   constructor (opts = {}) {
     this.canvas = opts.canvas;
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = opts.w;
     this.canvas.height = opts.h;
+
+    this.resource = {
+      grid: RESOURCE_PATH + COMMON_PATH +'grid.png',
+      ring: RESOURCE_PATH + COMMON_PATH +'ring.png',
+      dot: RESOURCE_PATH + NUMBERS_PATH +'dot.png',
+      number0: RESOURCE_PATH + NUMBERS_PATH +'number0.png',
+      number1: RESOURCE_PATH + NUMBERS_PATH +'number1.png',
+      number2: RESOURCE_PATH + NUMBERS_PATH +'number2.png',
+      number3: RESOURCE_PATH + NUMBERS_PATH +'number3.png',
+      number4: RESOURCE_PATH + NUMBERS_PATH +'number4.png',
+      number5: RESOURCE_PATH + NUMBERS_PATH +'number5.png',
+      number6: RESOURCE_PATH + NUMBERS_PATH +'number6.png',
+      number7: RESOURCE_PATH + NUMBERS_PATH +'number7.png',
+      number8: RESOURCE_PATH + NUMBERS_PATH +'number8.png',
+      number9: RESOURCE_PATH + NUMBERS_PATH +'number9.png',
+      a: RESOURCE_PATH + ALPHABETS_PATH + 'a.png',
+      b: RESOURCE_PATH + ALPHABETS_PATH + 'b.png',
+      c: RESOURCE_PATH + ALPHABETS_PATH + 'c.png',
+      d: RESOURCE_PATH + ALPHABETS_PATH + 'd.png',
+      e: RESOURCE_PATH + ALPHABETS_PATH + 'e.png',
+      f: RESOURCE_PATH + ALPHABETS_PATH + 'f.png',
+      g: RESOURCE_PATH + ALPHABETS_PATH + 'g.png',
+      h: RESOURCE_PATH + ALPHABETS_PATH + 'h.png',
+      i: RESOURCE_PATH + ALPHABETS_PATH + 'i.png',
+      j: RESOURCE_PATH + ALPHABETS_PATH + 'j.png',
+      k: RESOURCE_PATH + ALPHABETS_PATH + 'k.png',
+      l: RESOURCE_PATH + ALPHABETS_PATH + 'l.png',
+      m: RESOURCE_PATH + ALPHABETS_PATH + 'm.png',
+      n: RESOURCE_PATH + ALPHABETS_PATH + 'n.png',
+      o: RESOURCE_PATH + ALPHABETS_PATH + 'o.png',
+      p: RESOURCE_PATH + ALPHABETS_PATH + 'p.png',
+      q: RESOURCE_PATH + ALPHABETS_PATH + 'q.png',
+      r: RESOURCE_PATH + ALPHABETS_PATH + 'r.png',
+      s: RESOURCE_PATH + ALPHABETS_PATH + 's.png',
+      t: RESOURCE_PATH + ALPHABETS_PATH + 't.png',
+      u: RESOURCE_PATH + ALPHABETS_PATH + 'u.png',
+      v: RESOURCE_PATH + ALPHABETS_PATH + 'v.png',
+      w: RESOURCE_PATH + ALPHABETS_PATH + 'w.png',
+      x: RESOURCE_PATH + ALPHABETS_PATH + 'x.png',
+      y: RESOURCE_PATH + ALPHABETS_PATH + 'y.png',
+      z: RESOURCE_PATH + ALPHABETS_PATH + 'z.png',
+    }// end resource
   }// end constructor
 
   drawing (reserv) {
@@ -136,4 +183,7 @@ export default class Painter {
       drawHeight
     );// end drawImage
   }// end sharpImage
+
+  tickTime (time, opts = {}) {
+  }// end tickTime
 };// end Painter
