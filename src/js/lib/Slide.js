@@ -4,13 +4,15 @@ import Timestamp from './Timestamp.js';
 
 const TIME_LIMIT = 90;
 
+const RESOURCE_PATH = '../images/';
+
 export default class Slide {
 
   constructor (opts = {}) {
     this.num = opts.num;
     this.event = 0;
-    this.question;
     this.timer = 0;
+    this.question;
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
     });// end timestamp
@@ -18,6 +20,8 @@ export default class Slide {
     });// end soundManager
 
     this.resource = {
+      correctSuccess: 'maru.png',
+      correctFailure: 'batsu.png'
     };// end resource
 
     this.audio = {
@@ -30,13 +34,10 @@ export default class Slide {
   addQuestion (opts = {}) {
     this.question = new Question({
       sentence: opts.q,
-      correct: opts.a
+      correct: opts.a,
+      description: opts.d
     });// end Question
   }// end addQuestion
-
-  addSlide (wrap) {
-    wrap.append('<div class="slide"></div>');
-  }// end addSlide
 
   addTime () {
     const loop = () => {
@@ -49,11 +50,17 @@ export default class Slide {
     window.requestAnimationFrame(loop);
   }// end addTime
 
+  startCount () {
+    this.timestamp.startCount();
+  }// end startCount
+
   progEvent () {
-    if (this.event < 4) {
+    if (this.event < 5) {
       ++this.event;
 
       switch (this.event) {
+        case 5:
+          break;
         case 4:
           this.soundManager.play(this.audio.correctCall, {
             volume: 0.1
@@ -85,22 +92,48 @@ export default class Slide {
     }// end if
   }// recesEvent
 
-  startCount () {
-    this.timestamp.startCount();
-  }// end startCount
-
   getEvent () {
     const reserv = [];
 
     switch (this.event) {
+      case 5:
+        reserv.push({
+          src: RESOURCE_PATH +'description/'+ this.question.description,
+          method: 'align',
+          x: 0.5,
+          y: 0.5,
+          fit: 'width'
+        });// end push
       case 4:
-        reserv.push(this.question.correct);
+        reserv.push({
+          src: RESOURCE_PATH +'correct/'+ (this.question.correct == 1 ? this.resource.correctSuccess : this.resource.correctFailure),
+          method: 'align',
+          x: 0.5,
+          y: 0.5,
+          fit: 'width'
+        });// end push
       case 3:
         reserv.push(this.timer);
       case 2:
-        reserv.push(this.question.sentence);
+        reserv.push({
+          src: RESOURCE_PATH +'sentence/'+ this.question.sentence,
+          method: 'align',
+          x: 0.5,
+          y: 0.5,
+          fit: 'width'
+        });// end push
       case 1:
-        reserv.push(this.num);
+        reserv.push({
+          src: RESOURCE_PATH +'q_numbers/'+ this.num,
+          method: 'sharp',
+          basisX: 'left',
+          basisY: 'top',
+          offsetX: 10,
+          offsetY: 10,
+          basisSize: 'width',
+          w: 200,
+          h: 0
+        });// end push
       default:
         break;
     }// end switch

@@ -20,6 +20,8 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 
+const RESOURCE_PATH = '../images/';
+
 /*
 * ---初期設定---
 */
@@ -37,12 +39,6 @@ let index = 0;
 /*
 * ---関数---
 */
-const move = () => {
-  wrap.animate({
-    top: $('.slide').height() * -index
-  }, SLIDE_DURATION);// end animate
-}// end move
-
 const orderQuestion = (array, volume) => {
   let rand;
   let flg;
@@ -63,10 +59,13 @@ const orderQuestion = (array, volume) => {
         break;
     }// end while
 
+    rand = 1;// debug
+
     questions.push(rand);
     key.addQuestion({
       q: json[rand]['Q'],
-      a: json[rand]['A']
+      a: json[rand]['A'],
+      d: json[rand]['D']
     });// end addQuestion
   });// end forEach
 }// end orderQuestion
@@ -88,10 +87,8 @@ const masterDraw = () => {
 */
 for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
   slide[i] = new Slide({
-    num: (i + 1)
+    num: 'number'+ (i + 1) +'.png'
   });// end Sample
-
-  slide[i].addSlide(wrap);
 }// end for
 
 orderQuestion(slide, Object.keys(json).length);
@@ -106,7 +103,6 @@ $(window).on('keydown', (e) => {
     case KEY_UP:
       if (index > 0) {
         --index;
-        move();
       }// end if
       break;
     case KEY_RIGHT:
@@ -115,7 +111,6 @@ $(window).on('keydown', (e) => {
     case KEY_DOWN:
       if (index < SLIDE_LEN - 1) {
         ++index;
-        move();
       }// end if
       break;
     default:

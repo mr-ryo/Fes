@@ -71,12 +71,12 @@ gulp.task('pug', () => {
 gulp.task('html', gulp.series('pug'));
 
 // image
-gulp.task('image', () => {
-    return gulp.src(`${DEST}/images/*.png`)
-        .pipe(gulp.dest(`${DEST}/images`));
-});
+// gulp.task('image', () => {
+//     return gulp.src(`${DEST}/images/*.png`)
+//         .pipe(gulp.dest(`${DEST}/images`));
+// });
 
-gulp.task('image', gulp.series('image'));
+// gulp.task('image', gulp.series('image'));
 
 // serve
 gulp.task('browser-sync', () => {
