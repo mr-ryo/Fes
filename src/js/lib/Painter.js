@@ -27,6 +27,34 @@ export default class Painter {
   }// end clearCanvas
 
   alignImage (img, opts = {}) {
+    let x = isNaN(opts.x) ? 0 : opts.x;
+    let y = isNaN(opts.y) ? 0 : opts.y;
+
+    switch (opts.fit) {
+      case 'witdh':
+        const drawWidth = this.canvas.width;
+        const drawHeight = this.canvas.height * (img.width / img.height);// ?
+        break;
+      case 'height':
+        const drawWidth = this.canvas.width * (img.width / img.height);// ?
+        const drawHeight = this.canvas.height;
+        break;
+      default:
+        const drawWidth = img.width;
+        const drawHeight = img.height;
+        break;
+    }// end switch
+
+    x = (this.canvas.width - drawWidth) * x;
+    y = (this.canvas.height - drawHeight) * y;
+
+    this.ctx.drawImage(
+      img,
+      x,
+      y,
+      drawWidth,
+      drawHeight
+    );// end drawImage
   }// end alignImage
 
   alignText (str, opts = {}) {
