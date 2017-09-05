@@ -87,8 +87,6 @@ const orderQuestion = (array, volume) => {
         break;
     }// end while
 
-    rand = 1;// debug
-
     questions.push(rand);
     key.addQuestion({
       q: json[rand]['Q'],

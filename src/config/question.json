@@ -5,43 +5,98 @@
     "D": "desc1.png"
   },
   "2": {
-    "Q": "BBB",
-    "A": "bbb"
+    "Q": "sentence2.png",
+    "A": "0",
+    "D": "desc2.png"
   },
   "3": {
-    "Q": "CCC",
-    "A": "ccc"
+    "Q": "sentence3.png",
+    "A": "1",
+    "D": "desc3.png"
   },
   "4": {
-    "Q": "DDD",
-    "A": "ddd"
+    "Q": "sentence4.png",
+    "A": "0",
+    "D": "desc4.png"
   },
   "5": {
-    "Q": "EEE",
-    "A": "eee"
+    "Q": "sentence5.png",
+    "A": "1",
+    "D": "desc5.png"
   },
   "6": {
-    "Q": "FFF",
-    "A": "fff"
+    "Q": "sentence6.png",
+    "A": "0",
+    "D": "desc6.png"
   },
   "7": {
-    "Q": "GGG",
-    "A": "ggg"
+    "Q": "sentence7.png",
+    "A": "1",
+    "D": "desc7.png"
   },
   "8": {
-    "Q": "HHH",
-    "A": "hhh"
+    "Q": "sentence8.png",
+    "A": "1",
+    "D": "desc8.png"
   },
   "9": {
-    "Q": "III",
-    "A": "iii"
+    "Q": "sentence9.png",
+    "A": "0",
+    "D": "desc9.png"
   },
   "10": {
-    "Q": "JJJ",
-    "A": "jjj"
+    "Q": "sentence10.png",
+    "A": "0",
+    "D": "desc10.png"
   },
   "11": {
-    "Q": "KKK",
-    "A": "kkk"
+    "Q": "sentence11.png",
+    "A": "1",
+    "D": "desc11.png"
+  },
+  "12": {
+    "Q": "sentence12.png",
+    "A": "1",
+    "D": "desc12.png"
+  },
+  "13": {
+    "Q": "sentence13.png",
+    "A": "1",
+    "D": "desc13.png"
+  },
+  "14": {
+    "Q": "sentence14.png",
+    "A": "1",
+    "D": "desc14.png"
+  },
+  "15": {
+    "Q": "sentence15.png",
+    "A": "1",
+    "D": "desc15.png"
+  },
+  "16": {
+    "Q": "sentence16.png",
+    "A": "0",
+    "D": "desc16.png"
+  },
+  "17": {
+    "Q": "sentence17.png",
+    "A": "0",
+    "D": "desc17.png"
+  },
+  "18": {
+    "Q": "sentence18.png",
+    "A": "0",
+    "D": "desc18.png"
+  },
+  "19": {
+    "Q": "sentence19.png",
+    "A": "1",
+    "D": "desc19.png"
+  },
+  "20": {
+    "Q": "sentence20.png",
+    "A": "1",
+    "D": "desc20.png"
   },
 }
