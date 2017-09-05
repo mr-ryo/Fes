@@ -50,6 +50,16 @@ const soundManager = new SoundManager({
 const wrap = $('.slideWrap');
 const slide = [];
 let lines = [];
+let bgColor = {
+  r: 255,
+  g: 255,
+  b: 255
+}// end bgColor
+let afterColor = {
+  r: 255,
+  g: 255,
+  b: 255
+}// end afterColor
 let index = 0;
 
 /*
@@ -128,9 +138,32 @@ const gridMove = (array) => {
   });// end forEach
 }// end gridMove
 
+const changeColor = (palette) => {
+  palette.r = Math.floor(Math.random() * 255);
+  palette.g = Math.floor(Math.random() * 255);
+  palette.b = Math.floor(Math.random() * 255);
+}// end changeColor
+
+const paintBackGround = (palette1, palette2) => {
+  if (palette1.r - palette2.r != 0)
+    palette1.r += (palette1.r - palette2.r > 0 ? -1 : 1);
+  if (palette1.g - palette2.g != 0)
+    palette1.g += (palette1.g - palette2.g > 0 ? -1 : 1);
+  if (palette1.b - palette2.b != 0)
+    palette1.b += (palette1.b - palette2.b > 0 ? -1 : 1);
+
+  painter.ctx.fillStyle = 'rgb('+ palette1.r +','+ palette1.g +','+ palette1.b +')';
+  painter.ctx.fillRect(0, 0, DISP_WIDTH, DISP_HEIGHT);
+}// end add
+
+const addBackGround = () => {
+  paintBackGround(bgColor, afterColor);
+  gridMove(lines);
+}// end addBackGround
+
 const masterDraw = () => {
   const loop = () => {
-    gridMove(lines);
+    addBackGround();
     slide[index].addElements();
     window.requestAnimationFrame(loop);
   }// end loop
@@ -165,6 +198,7 @@ $(window).on('keydown', (e) => {
     case KEY_UP:
       if (index > 0) {
         --index;
+        changeColor(afterColor);
       }// end if
       break;
     case KEY_RIGHT:
@@ -173,6 +207,7 @@ $(window).on('keydown', (e) => {
     case KEY_DOWN:
       if (index < SLIDE_LEN - 1) {
         ++index;
+        changeColor(afterColor);
       }// end if
       break;
     default:
