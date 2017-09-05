@@ -1,5 +1,4 @@
-const fontFamily = 'Yu Gothic';
-const fontSize = 16;
+const TIME_LENGTH = 5;
 
 const RESOURCE_PATH = '../images/';
 const COMMON_PATH = 'common/';
@@ -58,37 +57,39 @@ export default class Painter {
 
   drawing (reserv) {
     for (let i = 0, size = reserv.length; i < size; ++i) {
-      if (isNaN(reserv[i])) {
-        switch (reserv[i].method) {
-          case 'align':
-            this.alignImage(reserv[i].src, {
-              x: reserv[i].x,
-              y: reserv[i].y,
-              fit: reserv[i].fit
-            });// end alignImage
-            break;
-          case 'sharp':
-            this.sharpImage(reserv[i].src, {
-              basisX: reserv[i].basisX,
-              basisY: reserv[i].basisY,
-              offsetX: reserv[i].offsetX,
-              offsetY: reserv[i].offsetY,
-              basisSize: reserv[i].basisSize,
-              w: reserv[i].w,
-              h: reserv[i].h
-            });// end sharpImage
-            break;
-          case 'time':
-            break;
-          default:
-            break;
-        }// end switch
-      } else {
-        this.alignText(reserv[i], {
-          x: 10,
-          y: 16 * (i + 1)
-        });// end alignText
-      }// end if
+      switch (reserv[i].method) {
+        case 'align':
+          this.alignImage(reserv[i].src, {
+            x: reserv[i].x,
+            y: reserv[i].y,
+            fit: reserv[i].fit,
+            offsetX: reserv[i].offsetX,
+            offsetY: reserv[i].offsetY
+          });// end alignImage
+          break;
+        case 'sharp':
+          this.sharpImage(reserv[i].src, {
+            basisX: reserv[i].basisX,
+            basisY: reserv[i].basisY,
+            offsetX: reserv[i].offsetX,
+            offsetY: reserv[i].offsetY,
+            basisSize: reserv[i].basisSize,
+            w: reserv[i].w,
+            h: reserv[i].h
+          });// end sharpImage
+          break;
+        case 'time':
+          this.tickTime(reserv[i].time +'', {
+            basisX: reserv[i].basisX,
+            basisY: reserv[i].basisY,
+            offsetX: reserv[i].offsetX,
+            offsetY: reserv[i].offsetY,
+            w: reserv[i].w
+          });// end tickTime
+          break;
+        default:
+          break;
+      }// end switch
     }// end for
   }// end drawing
 
@@ -138,15 +139,6 @@ export default class Painter {
     );// end drawImage
   }// end alignImage
 
-  alignText (str, opts = {}) {
-    const x = isNaN(opts.x) ? 0 : opts.x;
-    const y = isNaN(opts.y) ? 0 : opts.y;
-
-    this.ctx.font = fontSize +'px '+ fontFamily;
-    this.ctx.fillStyle = 'rgb(255, 255, 255)';
-    this.ctx.fillText(str, x, y);
-  }// end alignText
-
   sharpImage (img, opts = {}) {
     const image = new Image();
     image.src = img;
@@ -185,5 +177,43 @@ export default class Painter {
   }// end sharpImage
 
   tickTime (time, opts = {}) {
+    const str = time.split('');
+    const drawWidth = opts.w / TIME_LENGTH;
+    const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
+    const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
+    let src;
+    let x;
+
+    for (let i = 0, size = TIME_LENGTH; i < size; ++i) {
+
+      if (str[i] == null)
+        break;
+      else if (str[i] == '.')
+        src = this.resource.dot;
+      else
+        src = this.resource['number'+ str[i]];
+
+      switch (opts.basisX) {
+        case 'left':
+          x = offsetX + drawWidth * i;
+          break;
+        case 'right':
+          x = offsetX + drawWidth * -(size - i);
+          break;
+        default:
+          x = 0;
+          break;
+      }// end switch
+
+      this.sharpImage(src, {
+        basisX: opts.basisX,
+        basisY: opts.basisY,
+        offsetX: x,
+        offsetY: offsetY,
+        basisSize: 'width',
+        w: drawWidth,
+        h: 0
+      });// end sharpImage
+    }// end for
   }// end tickTime
 };// end Painter

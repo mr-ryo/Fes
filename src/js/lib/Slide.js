@@ -103,7 +103,9 @@ export default class Slide {
           method: 'align',
           x: 0.5,
           y: 0.5,
-          fit: 'width'
+          fit: 'width',
+          offsetX: 0,
+          offsetY: 300
         });// end push
       case 4:
         reserv.push({
@@ -114,7 +116,15 @@ export default class Slide {
           fit: 'height'
         });// end push
       case 3:
-        reserv.push(this.timer);
+        reserv.push({
+          time: this.timer,
+          method: 'time',
+          basisX: 'right',
+          basisY: 'top',
+          offsetX: 0,
+          offsetY: 10,
+          w: 100
+        });// end push
       case 2:
         reserv.push({
           src: RESOURCE_PATH +'sentence/'+ this.question.sentence,
