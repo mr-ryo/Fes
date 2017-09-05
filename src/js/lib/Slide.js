@@ -62,20 +62,16 @@ export default class Slide {
   }// end addQuestion
 
   addElements () {
-    switch (this.event) {
-      case DESCRIPTION_E_NUM:
-        this.addDescription();
-      case CORRECT_E_NUM:
-        this.addCorrect();
-      case TIME_E_NUM:
-        this.addTickTime();
-      case SENTENCE_E_NUM:
-        this.addSentence();
-      case NUMBER_E_NUM:
-        this.addNumber();
-      default:
-        break;
-    }// end switch
+    if (this.event >= NUMBER_E_NUM)
+      this.addNumber();
+    if (this.event >= SENTENCE_E_NUM && this.event <= TIME_E_NUM)
+      this.addSentence();
+    if (this.event == TIME_E_NUM)
+      this.addTickTime();
+    if (this.event == CORRECT_E_NUM)
+      this.addCorrect();
+    if (this.event == DESCRIPTION_E_NUM)
+      this.addDescription();
   }// end addElements
 
   addNumber () {
