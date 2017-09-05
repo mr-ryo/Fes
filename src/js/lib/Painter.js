@@ -178,4 +178,11 @@ export default class Painter {
       });// end sharpImage
     }// end for
   }// end tickTime
+
+  drawLine (opts = {}) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(opts.x1, opts.y1);
+    this.ctx.lineTo(opts.x2, opts.y2);
+    this.ctx.stroke();
+  }// end drawLine
 };// end Painter

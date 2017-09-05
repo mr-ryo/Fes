@@ -20,6 +20,10 @@ const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
+const ROW_LINES = 5;
+const COL_LINES = 5;
+const DISP_WIDTH = $(window).width();
+const DISP_HEIGHT = $(window).height();
 
 /*
 * ---Path---
@@ -34,8 +38,8 @@ const resource = {
 */
 const painter = new Painter({
   canvas: $('.canvas').get(0),
-  w: $(window).width(),
-  h: $(window).height()
+  w: DISP_WIDTH,
+  h: DISP_HEIGHT
 });// end painter
 const soundManager = new SoundManager({
 });// end soundManager
@@ -45,6 +49,7 @@ const soundManager = new SoundManager({
 */
 const wrap = $('.slideWrap');
 const slide = [];
+let lines = [];
 let index = 0;
 
 /*
@@ -82,8 +87,50 @@ const orderQuestion = (array, volume) => {
   });// end forEach
 }// end orderQuestion
 
+const gridExpand = (array) => {
+  for (let i = 0, size = ROW_LINES + COL_LINES; i < size; ++i) {
+    const x = i < ROW_LINES ? 0 : Math.floor(Math.random() * DISP_WIDTH);
+    const y = i < ROW_LINES ? Math.floor(Math.random() * DISP_HEIGHT) : 0;
+    const mult = x == 0 ? DISP_HEIGHT : DISP_WIDTH;
+    const point = Math.floor(Math.random() * (mult - 1) + 1);
+
+    array[i] = {
+      x1: x,
+      y1: y,
+      x2: (i < ROW_LINES ? DISP_WIDTH : x),
+      y2: (i < ROW_LINES ? y : DISP_HEIGHT),
+      p: point
+    }// end kay
+  }// end for
+}// end gridExpand
+
+const gridMove = (array) => {
+  array.forEach((key, index, array) => {
+    if (key.p == (key.x1 == 0 ? key.y1 : key.x1)) {
+      const mult = key.x1 == 0 ? DISP_HEIGHT : DISP_WIDTH;
+      key.p = Math.floor(Math.random() * (mult - 1) + 1);
+    }// end if
+
+    if (key.x1 == 0) {
+      key.y1 += (key.y1 < key.p ? 1 : -1);
+      key.y2 = key.y1
+    } else {
+      key.x1 += (key.x1 < key.p ? 1 : -1);
+      key.x2 = key.x1;
+    }// end if
+
+    painter.drawLine({
+      x1: key.x1,
+      y1: key.y1,
+      x2: key.x2,
+      y2: key.y2
+    });
+  });// end forEach
+}// end gridMove
+
 const masterDraw = () => {
   const loop = () => {
+    gridMove(lines);
     slide[index].addElements();
     window.requestAnimationFrame(loop);
   }// end loop
@@ -102,6 +149,7 @@ for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
 }// end for
 
 orderQuestion(slide, Object.keys(json).length);
+gridExpand(lines);
 soundManager.play(resource.bgm, {
   loop: true,
   volume: 0.1
