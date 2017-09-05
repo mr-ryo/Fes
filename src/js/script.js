@@ -7,6 +7,7 @@ import json from '../config/question.json';
 * ---Library---
 */
 import Slide from './lib/Slide.js';
+import SoundManager from './lib/SoundManager.js';
 import Painter from './lib/Painter.js';
 import $ from 'jquery';
 
@@ -20,19 +21,30 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 
+/*
+* ---Path---
+*/
 const RESOURCE_PATH = '../images/';
+const resource = {
+  bgm: '../sounds/game_maoudamashii_2_lastboss02.mp3'
+}// end resource
 
 /*
-* ---初期設定---
+* ---インスタンス化---
 */
-const wrap = $('.slideWrap');
-const slide = [];
 const painter = new Painter({
   canvas: $('.canvas').get(0),
   w: $(window).width(),
   h: $(window).height()
 });// end painter
+const soundManager = new SoundManager({
+});// end soundManager
 
+/*
+* ------
+*/
+const wrap = $('.slideWrap');
+const slide = [];
 let index = 0;
 
 /*
@@ -71,11 +83,8 @@ const orderQuestion = (array, volume) => {
 }// end orderQuestion
 
 const masterDraw = () => {
-  let reserv;
-
   const loop = () => {
-    reserv = slide[index].getEvent();
-    painter.drawing(reserv);
+    slide[index].addElements();
     window.requestAnimationFrame(loop);
   }// end loop
 
@@ -87,11 +96,16 @@ const masterDraw = () => {
 */
 for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
   slide[i] = new Slide({
-    num: 'number'+ (i + 1) +'.png'
+    num: (i + 1),
+    painter: painter
   });// end Sample
 }// end for
 
 orderQuestion(slide, Object.keys(json).length);
+soundManager.play(resource.bgm, {
+  loop: true,
+  volume: 0.1
+});// end play
 painter.clearCanvas();
 masterDraw();
 

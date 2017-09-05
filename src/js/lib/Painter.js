@@ -55,44 +55,6 @@ export default class Painter {
     }// end resource
   }// end constructor
 
-  drawing (reserv) {
-    for (let i = 0, size = reserv.length; i < size; ++i) {
-      switch (reserv[i].method) {
-        case 'align':
-          this.alignImage(reserv[i].src, {
-            x: reserv[i].x,
-            y: reserv[i].y,
-            fit: reserv[i].fit,
-            offsetX: reserv[i].offsetX,
-            offsetY: reserv[i].offsetY
-          });// end alignImage
-          break;
-        case 'sharp':
-          this.sharpImage(reserv[i].src, {
-            basisX: reserv[i].basisX,
-            basisY: reserv[i].basisY,
-            offsetX: reserv[i].offsetX,
-            offsetY: reserv[i].offsetY,
-            basisSize: reserv[i].basisSize,
-            w: reserv[i].w,
-            h: reserv[i].h
-          });// end sharpImage
-          break;
-        case 'time':
-          this.tickTime(reserv[i].time +'', {
-            basisX: reserv[i].basisX,
-            basisY: reserv[i].basisY,
-            offsetX: reserv[i].offsetX,
-            offsetY: reserv[i].offsetY,
-            w: reserv[i].w
-          });// end tickTime
-          break;
-        default:
-          break;
-      }// end switch
-    }// end for
-  }// end drawing
-
   clearCanvas () {
     const loop = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

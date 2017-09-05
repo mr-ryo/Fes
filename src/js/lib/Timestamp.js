@@ -1,18 +1,29 @@
 export default class Timestamp {
   constructor (opts = {}) {
-    this.duration = opts.duration;
-    this.start = 0;
-    this.current = this.duration;
+    this.timer = [];
   }// end constructor
 
-  startCount () {
-    this.start = new Date().getTime();
-  }// end addTimestamp
+  getCurrentTime () {
+    return new Date().getTime();
+  }// end getTime
 
-  calcTime () {
-    this.current = this.duration - (new Date().getTime() - this.start) * 0.001;
-    this.current = Math.floor(this.current * 100);
-    this.current /= 100;
-    return this.current;
+  addTime () {
+    this.timer.push(this.getCurrentTime());
+  }// end addTime
+
+  removeTime () {
+    this.timer.pop();
+  }// end removeTime
+
+  calcTime (time) {
+    return this.getCurrentTime() - time;
+  }// end calcTime
+
+  countDown (startTime, startSeconds) {
+    let elapsed = startSeconds - (this.getCurrentTime() - startTime) * 0.001;
+    elapsed = Math.floor(elapsed * 100);
+    elapsed /= 100;
+
+    return elapsed >= 0 ? elapsed : 0;
   }// end calcTime
 };// end Timestamp
