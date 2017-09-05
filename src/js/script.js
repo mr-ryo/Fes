@@ -20,6 +20,7 @@ const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
+const KEY_COLOR = 67;
 const ROW_LINES = 5;
 const COL_LINES = 5;
 const DISP_WIDTH = $(window).width();
@@ -209,6 +210,9 @@ $(window).on('keydown', (e) => {
         ++index;
         changeColor(afterColor);
       }// end if
+      break;
+    case KEY_COLOR:
+      changeColor(afterColor);
       break;
     default:
       break;
