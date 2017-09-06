@@ -3,7 +3,7 @@ import Painter from './Painter.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
-const TIME_LIMIT = 90;
+const TIME_LIMIT = 5;
 const UNDER_POSITION = 300;
 // E_NUM (EVENT_NUMBER)
 const NUMBER_E_NUM = 1;
@@ -111,9 +111,15 @@ export default class Slide {
   }// end addSentence
 
   addTickTime () {
-    const time = this.timestamp.countDown(this.timestamp.timer[TIME_E_NUM - 1], TIME_LIMIT);
+    let time = this.timestamp.countDown(this.timestamp.timer[TIME_E_NUM - 1], TIME_LIMIT);
 
-    this.painter.tickTime(time +'', {
+    if (time < 10)
+      time = '0'+ time;
+    if ((time +'').split('').length == 2)
+      time = time +'.00';
+    time = (time +'00').slice(0, 5);
+
+    this.painter.tickTime(time, {
       basisX: 'right',
       basisY: 'top',
       offsetX: 0,
