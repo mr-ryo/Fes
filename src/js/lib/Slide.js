@@ -4,6 +4,7 @@ import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
 const TIME_LIMIT = 90;
+const UNDER_POSITION = 300;
 // E_NUM (EVENT_NUMBER)
 const NUMBER_E_NUM = 1;
 const SENTENCE_E_NUM = 2;
@@ -89,10 +90,23 @@ export default class Slide {
   }// end addNumber
 
   addSentence () {
+    let offsetY = 0;
+
+    if (this.question.sentenceRefImage != '') {
+      this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.sentenceRefImage, {
+        x: 0.5,
+        y: 0.5,
+        fit: 'height',
+        scale: 0.6
+      });// end alignImage
+      offsetY = UNDER_POSITION;
+    }// end if
+
     this.painter.alignImage(RESOURCE_PATH +'sentence/'+ this.question.sentence, {
       x: 0.5,
       y: 0.5,
-      fit: 'width'
+      fit: 'width',
+      offsetY: offsetY
     });// end alignImage
   }// end addSentence
 
@@ -123,7 +137,8 @@ export default class Slide {
       this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.descriptionRefImage, {
         x: 0.5,
         y: 0.5,
-        fit: 'width'
+        fit: 'height',
+        scale: 0.6
       });// end alignImage
     }// end if
 
@@ -132,7 +147,7 @@ export default class Slide {
       y: 0.5,
       fit: 'width',
       offsetX: 0,
-      offsetY: 300
+      offsetY: UNDER_POSITION
     });// end alignImage
   }// end addDescription
 

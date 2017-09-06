@@ -11,7 +11,7 @@
     "A": "0",
     "D": "desc2.png",
     "Q_I": "",
-    "D_I": ""
+    "D_I": "hokkaido.png"
   },
   "3": {
     "Q": "sentence3.png",
@@ -39,7 +39,7 @@
     "A": "0",
     "D": "desc6.png",
     "Q_I": "sugicchi.png",
-    "D_I": ""
+    "D_I": "sugicchi.png"
   },
   "7": {
     "Q": "sentence7.png",
@@ -60,7 +60,7 @@
     "A": "0",
     "D": "desc9.png",
     "Q_I": "",
-    "D_I": ""
+    "D_I": "yoneya.png"
   },
   "10": {
     "Q": "sentence10.png",
@@ -73,8 +73,8 @@
     "Q": "sentence11.png",
     "A": "1",
     "D": "desc11.png",
-    "Q_I": "wedding_dress.jpg",
-    "D_I": ""
+    "Q_I": "wedding_dress_s.jpg",
+    "D_I": "wedding_dress_d.jpg"
   },
   "12": {
     "Q": "sentence12.png",
@@ -123,7 +123,7 @@
     "A": "0",
     "D": "desc18.png",
     "Q_I": "",
-    "D_I": "hatahata.png"
+    "D_I": "kunimasu.jpg"
   },
   "19": {
     "Q": "sentence19.png",

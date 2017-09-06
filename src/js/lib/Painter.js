@@ -67,7 +67,7 @@ export default class Painter {
   alignImage (img, opts = {}) {
     const image = new Image();
     image.src = img;
-    const scale = isNaN(opts.scale) ? 0 : opts.scale;
+    const scale = isNaN(opts.scale) ? 1 : opts.scale;
     const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
     const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
     let x = isNaN(opts.x) ? 0 : opts.x;
@@ -90,6 +90,8 @@ export default class Painter {
         break;
     }// end switch
 
+    drawWidth *= scale;
+    drawHeight *= scale;
     x = offsetX + (this.canvas.width - drawWidth) * x;
     y = offsetY + (this.canvas.height - drawHeight) * y;
 
