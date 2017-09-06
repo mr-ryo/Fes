@@ -57,7 +57,9 @@ export default class Slide {
     this.question = new Question({
       sentence: opts.q,
       correct: opts.a,
-      description: opts.d
+      description: opts.d,
+      sentenceRefImage: opts.img1,
+      descriptionRefImage: opts.img2
     });// end Question
   }// end addQuestion
 
@@ -117,6 +119,14 @@ export default class Slide {
   }// end addCorrect
 
   addDescription () {
+    if (this.question.descriptionRefImage != '') {
+      this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.descriptionRefImage, {
+        x: 0.5,
+        y: 0.5,
+        fit: 'width'
+      });// end alignImage
+    }// end if
+
     this.painter.alignImage(RESOURCE_PATH +'description/'+ this.question.description, {
       x: 0.5,
       y: 0.5,

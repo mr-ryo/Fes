@@ -67,6 +67,7 @@ export default class Painter {
   alignImage (img, opts = {}) {
     const image = new Image();
     image.src = img;
+    const scale = isNaN(opts.scale) ? 0 : opts.scale;
     const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
     const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
     let x = isNaN(opts.x) ? 0 : opts.x;

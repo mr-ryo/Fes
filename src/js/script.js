@@ -15,7 +15,6 @@ import $ from 'jquery';
 * ---定数---
 */
 const SLIDE_LEN = 10;
-const SLIDE_DURATION = 1000;
 const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_LEFT = 37;
@@ -91,7 +90,9 @@ const orderQuestion = (array, volume) => {
     key.addQuestion({
       q: json[rand]['Q'],
       a: json[rand]['A'],
-      d: json[rand]['D']
+      d: json[rand]['D'],
+      img1: json[rand]['Q_I'],
+      img2: json[rand]['D_I']
     });// end addQuestion
   });// end forEach
 }// end orderQuestion
