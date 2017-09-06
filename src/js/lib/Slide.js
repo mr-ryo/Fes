@@ -5,6 +5,13 @@ import Timestamp from './Timestamp.js';
 
 const TIME_LIMIT = 5;
 const UNDER_POSITION = 300;
+const NUMBER_DURATION = 300;
+const NUMBER_INITIAL_POSITION = -25;
+const SENTENCE_DURATION = 300;
+const TIME_DURATION = 300;
+const CORRECT_DURATION = 300;
+const DESCRIPTION_DURATION = 300;
+const DESCRIPTION_INITIAL_POSITION = 25;
 // E_NUM (EVENT_NUMBER)
 const NUMBER_E_NUM = 1;
 const SENTENCE_E_NUM = 2;
@@ -78,19 +85,30 @@ export default class Slide {
   }// end addElements
 
   addNumber () {
+    const time = this.timestamp.calcTime(this.timestamp.timer[NUMBER_E_NUM - 1]);
+    const v = time >= NUMBER_DURATION ? 1 : time / NUMBER_DURATION;
+
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
     this.painter.sharpImage(this.resource['number'+ this.num], {
       basisX: 'left',
       basisY: 'top',
       offsetX: 10,
-      offsetY: 10,
+      offsetY: 10 + NUMBER_INITIAL_POSITION * (1 - v),
       basisSize: 'width',
       w: 200,
       h: 0
     });// end sharpImage
+    this.painter.ctx.restore();
   }// end addNumber
 
   addSentence () {
+    const time = this.timestamp.calcTime(this.timestamp.timer[SENTENCE_E_NUM - 1]);
+    const v = time >= SENTENCE_DURATION ? 1 : time / SENTENCE_DURATION;
     let offsetY = 0;
+
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
 
     if (this.question.sentenceRefImage != '') {
       this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.sentenceRefImage, {
@@ -108,9 +126,12 @@ export default class Slide {
       fit: 'width',
       offsetY: offsetY
     });// end alignImage
+    this.painter.ctx.restore();
   }// end addSentence
 
   addTickTime () {
+    const pureTime = this.timestamp.calcTime(this.timestamp.timer[TIME_E_NUM - 1]);
+    const v = pureTime >= TIME_DURATION ? 1 : pureTime / TIME_DURATION;
     let time = this.timestamp.countDown(this.timestamp.timer[TIME_E_NUM - 1], TIME_LIMIT);
 
     if (time < 10)
@@ -119,32 +140,48 @@ export default class Slide {
       time = time +'.00';
     time = (time +'00').slice(0, 5);
 
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
     this.painter.tickTime(time, {
       basisX: 'right',
       basisY: 'top',
       offsetX: 0,
       offsetY: 10,
-      w: 100
+      w: 100 * (2 - v)
     });// end tickTime
+    this.painter.ctx.restore();
   }// end addTickTime
 
   addCorrect () {
+    const time = this.timestamp.calcTime(this.timestamp.timer[CORRECT_E_NUM - 1]);
+    const v = time >= CORRECT_DURATION ? 1 : time / CORRECT_DURATION;
     const img = this.question.correct == 1 ? this.resource.correctSuccess : this.resource.correctFailure;
 
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
     this.painter.alignImage(img, {
       x: 0.5,
       y: 0.5,
-      fit: 'height'
+      fit: 'height',
+      scale: v
     });// end alignImage
+    this.painter.ctx.restore();
   }// end addCorrect
 
   addDescription () {
+    const time = this.timestamp.calcTime(this.timestamp.timer[DESCRIPTION_E_NUM - 1]);
+    const v = time >= DESCRIPTION_DURATION ? 1 : time / DESCRIPTION_DURATION;
+
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
+
     if (this.question.descriptionRefImage != '') {
       this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.descriptionRefImage, {
         x: 0.5,
         y: 0.5,
         fit: 'height',
-        scale: 0.6
+        scale: 0.6,
+        offsetY: DESCRIPTION_INITIAL_POSITION * (1 - v)
       });// end alignImage
     }// end if
 
@@ -153,8 +190,9 @@ export default class Slide {
       y: 0.5,
       fit: 'width',
       offsetX: 0,
-      offsetY: UNDER_POSITION
+      offsetY: UNDER_POSITION + DESCRIPTION_INITIAL_POSITION * (1 - v)
     });// end alignImage
+    this.painter.ctx.restore();
   }// end addDescription
 
   progEvent () {
