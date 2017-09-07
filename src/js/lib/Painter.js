@@ -183,9 +183,16 @@ export default class Painter {
   }// end tickTime
 
   drawLine (opts = {}) {
+    const w = isNaN(opts.w) ? 1 : opts.w;
+
+    this.ctx.lineWidth = w;
+    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.6;
     this.ctx.beginPath();
     this.ctx.moveTo(opts.x1, opts.y1);
     this.ctx.lineTo(opts.x2, opts.y2);
     this.ctx.stroke();
+    this.ctx.restore();
   }// end drawLine
 };// end Painter

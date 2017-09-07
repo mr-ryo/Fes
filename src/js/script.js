@@ -20,8 +20,9 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
-const ROW_LINES = 5;
-const COL_LINES = 5;
+const ROW_LINES = 20;
+const COL_LINES = 20;
+const LINE_WIDTH = 2;
 const DISP_WIDTH = $(window).width();
 const DISP_HEIGHT = $(window).height();
 
@@ -51,14 +52,14 @@ const wrap = $('.slideWrap');
 const slide = [];
 let lines = [];
 let bgColor = {
-  r: 255,
-  g: 255,
-  b: 255
+  r: 21,
+  g: 43,
+  b: 25
 }// end bgColor
 let afterColor = {
-  r: 255,
-  g: 255,
-  b: 255
+  r: 21,
+  g: 43,
+  b: 25
 }// end afterColor
 let index = 0;
 
@@ -103,13 +104,15 @@ const gridExpand = (array) => {
     const y = i < ROW_LINES ? Math.floor(Math.random() * DISP_HEIGHT) : 0;
     const mult = x == 0 ? DISP_HEIGHT : DISP_WIDTH;
     const point = Math.floor(Math.random() * (mult - 1) + 1);
+    const w = Math.floor(Math.random() * LINE_WIDTH + 1);
 
     array[i] = {
       x1: x,
       y1: y,
       x2: (i < ROW_LINES ? DISP_WIDTH : x),
       y2: (i < ROW_LINES ? y : DISP_HEIGHT),
-      p: point
+      p: point,
+      w: w
     }// end kay
   }// end for
 }// end gridExpand
@@ -133,13 +136,14 @@ const gridMove = (array) => {
       x1: key.x1,
       y1: key.y1,
       x2: key.x2,
-      y2: key.y2
+      y2: key.y2,
+      w: key.w
     });
   });// end forEach
 }// end gridMove
 
 const changeColor = (palette) => {
-  palette.r = Math.floor(Math.random() * 255);
+  palette.r = Math.floor(Math.random() * 10);
   palette.g = Math.floor(Math.random() * 255);
   palette.b = Math.floor(Math.random() * 255);
 }// end changeColor
@@ -183,10 +187,10 @@ for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
 
 orderQuestion(slide, Object.keys(json).length);
 gridExpand(lines);
-soundManager.play(resource.bgm, {
-  loop: true,
-  volume: 0.1
-});// end play
+// soundManager.play(resource.bgm, {
+//   loop: true,
+//   volume: 0.1
+// });// end play
 painter.clearCanvas();
 masterDraw();
 
