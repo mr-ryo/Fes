@@ -185,14 +185,32 @@ export default class Painter {
   drawLine (opts = {}) {
     const w = isNaN(opts.w) ? 1 : opts.w;
 
-    this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.save();
     this.ctx.globalAlpha = 0.6;
+    this.ctx.lineWidth = w;
+    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
     this.ctx.moveTo(opts.x1, opts.y1);
     this.ctx.lineTo(opts.x2, opts.y2);
     this.ctx.stroke();
     this.ctx.restore();
   }// end drawLine
+
+  drawCircle (opts = {}) {
+    const x = isNaN(opts.x) ? 0 : opts.x;
+    const y = isNaN(opts.y) ? 0 : opts.y;
+    const r = isNaN(opts.r) ? 0 : opts.r;
+    const w = isNaN(opts.w) ? 0 : opts.w;
+    const startAngle = 0;
+    const endAngle = 360 * Math.PI / 180;
+
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.5;
+    this.ctx.lineWidth = w;
+    this.ctx.strokeStyle = 'rgb(255, 0, 50)';
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, r, startAngle, endAngle, false);
+    this.ctx.stroke();
+    this.ctx.restore();
+  }// end drawCircle
 };// end Painter

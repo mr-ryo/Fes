@@ -11,6 +11,10 @@ export default class Timestamp {
     this.timer.push(this.getCurrentTime());
   }// end addTime
 
+  discardTime () {
+    this.timer.shift();
+  }// end discardTime
+
   removeTime () {
     this.timer.pop();
   }// end removeTime

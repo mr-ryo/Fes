@@ -7,6 +7,7 @@ import json from '../config/question.json';
 * ---Library---
 */
 import Slide from './lib/Slide.js';
+import Timestamp from './lib/Timestamp.js';
 import SoundManager from './lib/SoundManager.js';
 import Painter from './lib/Painter.js';
 import $ from 'jquery';
@@ -20,11 +21,13 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
-const ROW_LINES = 20;
-const COL_LINES = 20;
+const ROW_LINES = 10;
+const COL_LINES = 10;
 const LINE_WIDTH = 2;
 const DISP_WIDTH = $(window).width();
 const DISP_HEIGHT = $(window).height();
+const CIRCLE_DURATION = 1000;
+const CIRCLE_VOLUME = 7;
 
 /*
 * ---Path---
@@ -37,6 +40,8 @@ const resource = {
 /*
 * ---インスタンス化---
 */
+const timestamp = new Timestamp({
+});// end timestamp
 const painter = new Painter({
   canvas: $('.canvas').get(0),
   w: DISP_WIDTH,
@@ -50,6 +55,7 @@ const soundManager = new SoundManager({
 */
 const wrap = $('.slideWrap');
 const slide = [];
+let circles = [];
 let lines = [];
 let bgColor = {
   r: 21,
@@ -98,6 +104,47 @@ const orderQuestion = (array, volume) => {
   });// end forEach
 }// end orderQuestion
 
+const changeColor = (palette) => {
+  palette.r = Math.floor(Math.random() * 10);
+  palette.g = Math.floor(Math.random() * 255);
+  palette.b = Math.floor(Math.random() * 255);
+}// end changeColor
+
+const paintBackGround = (palette1, palette2) => {
+  if (palette1.r - palette2.r != 0)
+    palette1.r += (palette1.r - palette2.r > 0 ? -1 : 1);
+  if (palette1.g - palette2.g != 0)
+    palette1.g += (palette1.g - palette2.g > 0 ? -1 : 1);
+  if (palette1.b - palette2.b != 0)
+    palette1.b += (palette1.b - palette2.b > 0 ? -1 : 1);
+
+  painter.ctx.fillStyle = 'rgb('+ palette1.r +','+ palette1.g +','+ palette1.b +')';
+  painter.ctx.fillRect(0, 0, DISP_WIDTH, DISP_HEIGHT);
+}// end add
+
+const circle = (array) => {
+  if (Math.floor(Math.random() * 10) == 0) {
+    timestamp.addTime();
+    array.push([{
+      x: 50,
+      y: 50,
+      r: 50,
+      w: 3
+    }]);
+  }// end if
+
+  array.forEach((key, index, array) => {
+    key.forEach((circle, c_index, key_array) => {
+      painter.drawCircle({
+        x: circle.x,
+        y: circle.y,
+        r: circle.r,
+        w: circle.w
+      });
+    });// end forEach
+  });// end forEach
+}// end circle
+
 const gridExpand = (array) => {
   for (let i = 0, size = ROW_LINES + COL_LINES; i < size; ++i) {
     const x = i < ROW_LINES ? 0 : Math.floor(Math.random() * DISP_WIDTH);
@@ -142,30 +189,15 @@ const gridMove = (array) => {
   });// end forEach
 }// end gridMove
 
-const changeColor = (palette) => {
-  palette.r = Math.floor(Math.random() * 10);
-  palette.g = Math.floor(Math.random() * 255);
-  palette.b = Math.floor(Math.random() * 255);
-}// end changeColor
-
-const paintBackGround = (palette1, palette2) => {
-  if (palette1.r - palette2.r != 0)
-    palette1.r += (palette1.r - palette2.r > 0 ? -1 : 1);
-  if (palette1.g - palette2.g != 0)
-    palette1.g += (palette1.g - palette2.g > 0 ? -1 : 1);
-  if (palette1.b - palette2.b != 0)
-    palette1.b += (palette1.b - palette2.b > 0 ? -1 : 1);
-
-  painter.ctx.fillStyle = 'rgb('+ palette1.r +','+ palette1.g +','+ palette1.b +')';
-  painter.ctx.fillRect(0, 0, DISP_WIDTH, DISP_HEIGHT);
-}// end add
-
 const addBackGround = () => {
   paintBackGround(bgColor, afterColor);
+  // circle(circles);
   gridMove(lines);
 }// end addBackGround
 
 const masterDraw = () => {
+  painter.clearCanvas();
+
   const loop = () => {
     addBackGround();
     slide[index].addElements();
@@ -191,7 +223,6 @@ gridExpand(lines);
 //   loop: true,
 //   volume: 0.1
 // });// end play
-painter.clearCanvas();
 masterDraw();
 
 $(window).on('keydown', (e) => {
