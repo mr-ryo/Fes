@@ -120,9 +120,9 @@ const paintBackGround = (palette1, palette2) => {
 
   painter.ctx.fillStyle = 'rgb('+ palette1.r +','+ palette1.g +','+ palette1.b +')';
   painter.ctx.fillRect(0, 0, DISP_WIDTH, DISP_HEIGHT);
-}// end add
+}// end paintBackGround
 
-const circle = (array) => {
+const particle = (array) => {
   if (Math.floor(Math.random() * 10) == 0) {
     timestamp.addTime();
     array.push([{
@@ -143,7 +143,7 @@ const circle = (array) => {
       });
     });// end forEach
   });// end forEach
-}// end circle
+}// end particle
 
 const gridExpand = (array) => {
   for (let i = 0, size = ROW_LINES + COL_LINES; i < size; ++i) {
@@ -191,7 +191,7 @@ const gridMove = (array) => {
 
 const addBackGround = () => {
   paintBackGround(bgColor, afterColor);
-  // circle(circles);
+  // particle(circles);
   gridMove(lines);
 }// end addBackGround
 
