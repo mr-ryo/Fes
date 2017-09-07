@@ -205,9 +205,9 @@ export default class Painter {
     const endAngle = 360 * Math.PI / 180;
 
     this.ctx.save();
-    this.ctx.globalAlpha = 0.5;
+    this.ctx.globalAlpha = 0.3;
     this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = 'rgb(255, 0, 50)';
+    this.ctx.strokeStyle = 'rgb(255, 0, 255)';
     this.ctx.beginPath();
     this.ctx.arc(x, y, r, startAngle, endAngle, false);
     this.ctx.stroke();

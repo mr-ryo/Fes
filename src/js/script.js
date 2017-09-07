@@ -7,6 +7,7 @@ import json from '../config/question.json';
 * ---Library---
 */
 import Slide from './lib/Slide.js';
+import Particle from './lib/Particle.js';
 import Timestamp from './lib/Timestamp.js';
 import SoundManager from './lib/SoundManager.js';
 import Painter from './lib/Painter.js';
@@ -21,13 +22,12 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
+const PARTICLE_PROB = 75;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
 const DISP_WIDTH = $(window).width();
 const DISP_HEIGHT = $(window).height();
-const CIRCLE_DURATION = 1000;
-const CIRCLE_VOLUME = 7;
 
 /*
 * ---Path---
@@ -55,7 +55,7 @@ const soundManager = new SoundManager({
 */
 const wrap = $('.slideWrap');
 const slide = [];
-let circles = [];
+let particles = [];
 let lines = [];
 let bgColor = {
   r: 21,
@@ -122,28 +122,41 @@ const paintBackGround = (palette1, palette2) => {
   painter.ctx.fillRect(0, 0, DISP_WIDTH, DISP_HEIGHT);
 }// end paintBackGround
 
-const particle = (array) => {
-  if (Math.floor(Math.random() * 10) == 0) {
-    timestamp.addTime();
-    array.push([{
-      x: 50,
-      y: 50,
-      r: 50,
-      w: 3
-    }]);
+const particleExpand = (array) => {
+  const birth = Math.floor(Math.random() * PARTICLE_PROB);
+
+  if (!birth) {
+    let method;
+
+    switch (Math.floor(Math.random() * 3)) {
+      case 0:
+        method = 'vertical';
+        break;
+      case 1:
+        method = 'horizontal';
+        break;
+      case 2:
+        method = 'swim';
+        break;
+      default:
+        break;
+    }// switch
+
+    array.push(new Particle({
+      x: Math.floor(Math.random() * DISP_WIDTH),
+      y: Math.floor(Math.random() * DISP_HEIGHT),
+      method: method,
+      painter: painter
+    }));// end push
   }// end if
 
-  array.forEach((key, index, array) => {
-    key.forEach((circle, c_index, key_array) => {
-      painter.drawCircle({
-        x: circle.x,
-        y: circle.y,
-        r: circle.r,
-        w: circle.w
-      });
-    });// end forEach
+  array.forEach((particle, index, array) => {
+    particle.addParticle();
+
+    if (particle.getNotice())
+      array.shift();
   });// end forEach
-}// end particle
+}// end particleExpand
 
 const gridExpand = (array) => {
   for (let i = 0, size = ROW_LINES + COL_LINES; i < size; ++i) {
@@ -191,7 +204,7 @@ const gridMove = (array) => {
 
 const addBackGround = () => {
   paintBackGround(bgColor, afterColor);
-  // particle(circles);
+  particleExpand(particles);
   gridMove(lines);
 }// end addBackGround
 

@@ -20,7 +20,9 @@ export default class Timestamp {
   }// end removeTime
 
   calcTime (time) {
-    return this.getCurrentTime() - time;
+    const t = isNaN(time) ? this.timer[0] : time;
+
+    return this.getCurrentTime() - t;
   }// end calcTime
 
   countDown (startTime, startSeconds) {
