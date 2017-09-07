@@ -45,6 +45,7 @@ export default class Particle {
       default:
         break;
     }// switch
+
     this.confirmCompletion();
   }// addParticle
 

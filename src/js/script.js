@@ -198,7 +198,7 @@ const gridMove = (array) => {
       x2: key.x2,
       y2: key.y2,
       w: key.w
-    });
+    });// end drawLine
   });// end forEach
 }// end gridMove
 
