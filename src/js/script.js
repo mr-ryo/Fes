@@ -58,14 +58,14 @@ const slide = [];
 let particles = [];
 let lines = [];
 let bgColor = {
-  r: 21,
-  g: 43,
-  b: 25
+  r: 5,
+  g: 52,
+  b: 55
 }// end bgColor
 let afterColor = {
-  r: 21,
-  g: 43,
-  b: 25
+  r: bgColor.r,
+  g: bgColor.g,
+  b: bgColor.b
 }// end afterColor
 let index = 0;
 
