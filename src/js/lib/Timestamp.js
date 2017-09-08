@@ -26,8 +26,8 @@ export default class Timestamp {
   }// end calcTime
 
   countDown (startTime, startSeconds) {
-    let elapsed = startSeconds - (this.getCurrentTime() - startTime) * 0.001;
-    elapsed = Math.floor(elapsed * 100);
+    let elapsed = startSeconds - (this.getCurrentTime() - startTime);
+    elapsed = Math.floor(elapsed * 0.1);
     elapsed /= 100;
 
     return elapsed >= 0 ? elapsed : 0;

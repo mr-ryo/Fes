@@ -22,6 +22,9 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
+const RED_LIMIT = 10;
+const GREEN_LIMIT = 200;
+const BLUE_LIMIT = 200;
 const PARTICLE_PROB = 20;
 const ROW_LINES = 10;
 const COL_LINES = 10;
@@ -105,9 +108,9 @@ const orderQuestion = (array, volume) => {
 }// end orderQuestion
 
 const changeColor = (palette) => {
-  palette.r = Math.floor(Math.random() * 10);
-  palette.g = Math.floor(Math.random() * 255);
-  palette.b = Math.floor(Math.random() * 255);
+  palette.r = Math.floor(Math.random() * RED_LIMIT);
+  palette.g = Math.floor(Math.random() * GREEN_LIMIT);
+  palette.b = Math.floor(Math.random() * BLUE_LIMIT);
 }// end changeColor
 
 const paintBackGround = (palette1, palette2) => {

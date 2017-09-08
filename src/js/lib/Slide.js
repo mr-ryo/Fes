@@ -2,7 +2,7 @@ import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 5000;
 const UNDER_POSITION = 300;
 const NUMBER_DURATION = 300;
 const NUMBER_INITIAL_POSITION = -25;

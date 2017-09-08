@@ -205,7 +205,7 @@ export default class Painter {
     const endAngle = 360 * Math.PI / 180;
 
     this.ctx.save();
-    this.ctx.globalAlpha = 0.4;
+    this.ctx.globalAlpha = 0.8;
     this.ctx.lineWidth = w;
     this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
@@ -221,7 +221,7 @@ export default class Painter {
     const h = isNaN(opts.h) ? 0 : opts.h;
 
     this.ctx.save();
-    this.ctx.globalAlpha = 0.4;
+    this.ctx.globalAlpha = 0.8;
     this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
     this.ctx.rect(x, y, w, h);
