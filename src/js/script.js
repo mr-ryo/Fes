@@ -22,7 +22,7 @@ const KEY_DOWN = 40;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
-const PARTICLE_PROB = 75;
+const PARTICLE_PROB = 20;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
@@ -152,7 +152,9 @@ const particleExpand = (array) => {
 
   array.forEach((particle, index, array) => {
     particle.addParticle();
+  });// end forEach
 
+  array.forEach((particle, index, array) => {
     if (particle.getNotice())
       array.shift();
   });// end forEach
@@ -205,7 +207,7 @@ const gridMove = (array) => {
 const addBackGround = () => {
   paintBackGround(bgColor, afterColor);
   particleExpand(particles);
-  gridMove(lines);
+  // gridMove(lines);
 }// end addBackGround
 
 const masterDraw = () => {

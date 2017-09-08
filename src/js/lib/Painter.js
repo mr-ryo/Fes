@@ -205,12 +205,26 @@ export default class Painter {
     const endAngle = 360 * Math.PI / 180;
 
     this.ctx.save();
-    this.ctx.globalAlpha = 0.3;
+    this.ctx.globalAlpha = 0.4;
     this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = 'rgb(255, 0, 255)';
+    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
     this.ctx.arc(x, y, r, startAngle, endAngle, false);
     this.ctx.stroke();
     this.ctx.restore();
   }// end drawCircle
+
+  drawSquare (opts = {}) {
+    const x = isNaN(opts.x) ? 0 : opts.x;
+    const y = isNaN(opts.y) ? 0 : opts.y;
+    const w = isNaN(opts.w) ? 0 : opts.w;
+    const h = isNaN(opts.h) ? 0 : opts.h;
+
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.4;
+    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
+    this.ctx.rect(x, y, w, h);
+    this.ctx.stroke();
+    this.ctx.restore();
+  }// end drawSquare
 };// end Painter
