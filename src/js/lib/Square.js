@@ -10,10 +10,13 @@ export default class Square {
   addSquare (v) {
     const drawWidth = this.w * v;
     const drawHeight = this.h * v;
+    const x = this.x + (this.w - drawWidth) * 0.5;
+    const y = this.y + (this.h - drawHeight) * 0.5;
+
 
     this.painter.drawSquare({
-      x: this.x,
-      y: this.y,
+      x: x,
+      y: y,
       w: drawWidth,
       h: drawHeight
     });// end drawSquare
