@@ -1,5 +1,4 @@
 import SoundManager from './SoundManager.js';
-import Painter from './Painter.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 

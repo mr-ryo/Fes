@@ -223,6 +223,7 @@ export default class Painter {
     this.ctx.save();
     this.ctx.globalAlpha = 0.4;
     this.ctx.strokeStyle = 'rgb(255, 216, 45)';
+    this.ctx.beginPath();
     this.ctx.rect(x, y, w, h);
     this.ctx.stroke();
     this.ctx.restore();

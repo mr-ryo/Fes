@@ -1,5 +1,3 @@
-import Painter from './Painter.js';
-
 export default class Circle {
   constructor (opts = {}) {
     this.painter = opts.painter;
