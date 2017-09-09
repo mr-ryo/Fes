@@ -1,13 +1,14 @@
-import SoundManager from './SoundManager.js';
+// import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
-const TIME_LIMIT = 5000;
+const TIME_LIMIT = 10000;
 const UNDER_POSITION = 300;
 const NUMBER_DURATION = 300;
 const NUMBER_INITIAL_POSITION = -25;
 const SENTENCE_DURATION = 300;
 const TIME_DURATION = 500;
+const TIME_LASTDOWN = 5;
 const CORRECT_DURATION = 300;
 const DESCRIPTION_DURATION = 300;
 const DESCRIPTION_INITIAL_POSITION = 25;
@@ -32,8 +33,9 @@ export default class Slide {
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
     });// end timestamp
-    this.soundManager = new SoundManager({
-    });// end soundManager
+    // this.soundManager = new SoundManager({
+    // });// end soundManager
+    this.soundManager = opts.soundManager;
     this.painter = opts.painter;
 
     this.resource = {
@@ -133,11 +135,15 @@ export default class Slide {
     const v = pureTime >= TIME_DURATION ? 1 : pureTime / TIME_DURATION;
     let time = this.timestamp.countDown(this.timestamp.timer[TIME_E_NUM - 1], TIME_LIMIT);
 
-    if (time < 10)
-      time = '0'+ time;
-    if ((time +'').split('').length == 2)
-      time = time +'.00';
-    time = (time +'00').slice(0, 5);
+    if (time < TIME_LASTDOWN + 1) {
+      time = Math.floor(time) +'';
+    } else {
+      if (time < 10)
+        time = '0'+ time;
+      if ((time +'').split('').length == 2)
+        time = time +'.00';
+      time = (time +'00').slice(0, 5);
+    }// end if
 
     this.painter.ctx.save();
     this.painter.ctx.globalAlpha = v;

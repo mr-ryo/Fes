@@ -3,6 +3,10 @@ export default class Timestamp {
     this.timer = [];
   }// end constructor
 
+  getStartTime () {
+    return this.timer[0];
+  }// end getStartTime
+
   getCurrentTime () {
     return new Date().getTime();
   }// end getTime

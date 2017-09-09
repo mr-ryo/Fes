@@ -5,6 +5,7 @@ import Square from './Square.js';
 const PARTICLE_VOLUME = 7;
 const GRAIN_DURATION = 300;
 const GRAIN_SPACE = 5;
+const GRAIN_REMOVE = 5;
 const CIRCLE_RADIUS = 20;
 const CIRCLE_LINE_WIDTH = 2;
 const SQUARE_WIDTH = 40;
@@ -61,14 +62,17 @@ export default class Particle {
 
   verticalDream () {
     const time = this.timestamp.calcTime();
-    let v;
+    let baseV;
+    let v1;
+    let v2;
 
     this.grains.forEach((key, index, array) => {
-      v = (time - GRAIN_DURATION * index) / GRAIN_DURATION;
-      v = v >= 1 ? 1 : v;
+      baseV = (time - GRAIN_DURATION * index) / GRAIN_DURATION;
+      v1 = baseV >= 1 ? 1 : baseV;
+      v2 = baseV >= GRAIN_REMOVE ? GRAIN_REMOVE : baseV;
 
       if (this.grains.length != PARTICLE_VOLUME) {
-        if (v >= 1 && this.grains.length == index + 1) {
+        if (v1 >= 1 && this.grains.length == index + 1) {
           // array.push(new Circle({
           //   painter: this.painter,
           //   x: this.x,
@@ -87,20 +91,23 @@ export default class Particle {
       }// end if
 
       // key.addCircle(v);
-      key.addSquare(v);
+      key.addSquare(v1, v2, GRAIN_REMOVE);
     });// forEach
   }// end verticalDream
 
   horizontalDream () {
     const time = this.timestamp.calcTime();
-    let v;
+    let baseV;
+    let v1;
+    let v2;
 
     this.grains.forEach((key, index, array) => {
-      v = (time - GRAIN_DURATION * index) / GRAIN_DURATION;
-      v = v >= 1 ? 1 : v;
+      baseV = (time - GRAIN_DURATION * index) / GRAIN_DURATION;
+      v1 = baseV >= 1 ? 1 : baseV;
+      v2 = baseV >= GRAIN_REMOVE ? GRAIN_REMOVE : baseV;
 
       if (this.grains.length != PARTICLE_VOLUME) {
-        if (v >= 1 && this.grains.length == index + 1) {
+        if (v1 >= 1 && this.grains.length == index + 1) {
           // array.push(new Circle({
           //   painter: this.painter,
           //   x: this.x + ((CIRCLE_RADIUS + GRAIN_SPACE) * 2 * (index + 1)),
@@ -119,7 +126,7 @@ export default class Particle {
       }// end if
 
       // key.addCircle(v);
-      key.addSquare(v);
+      key.addSquare(v1, v2, GRAIN_REMOVE);
     });// forEach
   }// end horizontalDream
 
@@ -129,7 +136,7 @@ export default class Particle {
   confirmCompletion () {
     const time = this.timestamp.calcTime();
 
-    if (time >= GRAIN_DURATION * PARTICLE_VOLUME)
+    if (time >= GRAIN_DURATION * (PARTICLE_VOLUME + GRAIN_REMOVE))
       this.flg = true;
   }// end confirmCompletion
 

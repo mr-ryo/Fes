@@ -23,8 +23,8 @@ const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 const KEY_COLOR = 67;
 const RED_LIMIT = 10;
-const GREEN_LIMIT = 200;
-const BLUE_LIMIT = 200;
+const GREEN_LIMIT = 150;
+const BLUE_LIMIT = 150;
 const PARTICLE_PROB = 20;
 const ROW_LINES = 10;
 const COL_LINES = 10;
@@ -158,8 +158,9 @@ const particleExpand = (array) => {
   });// end forEach
 
   array.forEach((particle, index, array) => {
-    if (particle.getNotice())
-      array.shift();
+    if (particle != null)// エラー回避
+      if (particle.getNotice())
+        array.shift();
   });// end forEach
 }// end particleExpand
 
@@ -231,6 +232,7 @@ const masterDraw = () => {
 for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
   slide[i] = new Slide({
     num: (i + 1),
+    soundManager: soundManager,
     painter: painter
   });// end Sample
 }// end for

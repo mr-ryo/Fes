@@ -149,6 +149,16 @@ export default class Painter {
     let src;
     let x;
 
+    if (str.length == 1) {
+      this.alignImage(this.resource['number'+ str[0]], {
+        x: 0.5,
+        y: 0.5,
+        fit: 'height'
+      });// end alignImage
+
+      return;
+    }// end if
+
     for (let i = 0, size = TIME_LENGTH; i < size; ++i) {
 
       if (str[i] == null)
@@ -201,11 +211,12 @@ export default class Painter {
     const y = isNaN(opts.y) ? 0 : opts.y;
     const r = isNaN(opts.r) ? 0 : opts.r;
     const w = isNaN(opts.w) ? 0 : opts.w;
+    const alpha = isNaN(opts.alpha) ? 1 : opts.alpha;
     const startAngle = 0;
     const endAngle = 360 * Math.PI / 180;
 
     this.ctx.save();
-    this.ctx.globalAlpha = 0.8;
+    this.ctx.globalAlpha = alpha;
     this.ctx.lineWidth = w;
     this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
@@ -220,12 +231,8 @@ export default class Painter {
     const w = isNaN(opts.w) ? 0 : opts.w;
     const h = isNaN(opts.h) ? 0 : opts.h;
 
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.8;
-    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
     this.ctx.beginPath();
     this.ctx.rect(x, y, w, h);
     this.ctx.stroke();
-    this.ctx.restore();
   }// end drawSquare
 };// end Painter
