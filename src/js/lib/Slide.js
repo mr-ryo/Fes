@@ -54,11 +54,11 @@ export default class Slide {
     };// end resource
 
     this.audio = {
-      numberCall: '../sounds/se_maoudamashii_onepoint28.mp3',
-      sentenceCall: '../sounds/se_maoudamashii_onepoint22.mp3',
+      numberCall: '../sounds/number.mp3',
+      sentenceCall: '../sounds/se_maoudamashii_system04.mp3',
       timeCall: '../sounds/se_maoudamashii_system40.mp3',
-      correctCall: '../sounds/se_maoudamashii_onepoint11.mp3',
-      descriptionCall: '../sounds/se_maoudamashii_onepoint07.mp3',
+      correctCall: '../sounds/se_maoudamashii_system48.mp3',
+      descriptionCall: '../sounds/se_maoudamashii_system10.mp3',
     }// end audio
   }// end constructor
 

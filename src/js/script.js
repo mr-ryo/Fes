@@ -37,7 +37,7 @@ const DISP_HEIGHT = $(window).height();
 */
 const RESOURCE_PATH = '../images/';
 const resource = {
-  bgm: '../sounds/game_maoudamashii_2_lastboss02.mp3'
+  bgm: '../sounds/bgm_maoudamashii_cyber29.mp3'
 }// end resource
 
 /*
@@ -239,10 +239,10 @@ for (let i = 0, size = SLIDE_LEN; i < size; ++i) {
 
 orderQuestion(slide, Object.keys(json).length);
 gridExpand(lines);
-// soundManager.play(resource.bgm, {
-//   loop: true,
-//   volume: 0.1
-// });// end play
+soundManager.play(resource.bgm, {
+  loop: true,
+  volume: 0.1
+});// end play
 masterDraw();
 
 $(window).on('keydown', (e) => {
