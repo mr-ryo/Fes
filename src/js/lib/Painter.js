@@ -28,6 +28,12 @@ export default class Painter {
       number7: RESOURCE_PATH + NUMBERS_PATH +'number7.png',
       number8: RESOURCE_PATH + NUMBERS_PATH +'number8.png',
       number9: RESOURCE_PATH + NUMBERS_PATH +'number9.png',
+      gold0: RESOURCE_PATH + NUMBERS_PATH + 'number0_gold.png',
+      gold1: RESOURCE_PATH + NUMBERS_PATH + 'number1_gold.png',
+      gold2: RESOURCE_PATH + NUMBERS_PATH + 'number2_gold.png',
+      gold3: RESOURCE_PATH + NUMBERS_PATH + 'number3_gold.png',
+      gold4: RESOURCE_PATH + NUMBERS_PATH + 'number4_gold.png',
+      gold5: RESOURCE_PATH + NUMBERS_PATH + 'number5_gold.png',
       a: RESOURCE_PATH + ALPHABETS_PATH + 'a.png',
       b: RESOURCE_PATH + ALPHABETS_PATH + 'b.png',
       c: RESOURCE_PATH + ALPHABETS_PATH + 'c.png',
@@ -152,7 +158,7 @@ export default class Painter {
     let x;
 
     if (str.length == 1) {
-      this.alignImage(this.resource['number'+ str[0]], {
+      this.alignImage(this.resource['gold'+ str[0]], {
         x: 0.5,
         y: 0.5,
         fit: 'height'

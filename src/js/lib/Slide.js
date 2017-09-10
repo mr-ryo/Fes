@@ -1,4 +1,3 @@
-// import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
@@ -35,6 +34,7 @@ const DESCRIPTION_E_NUM = 5;
 const NUMBER_SOUND_VOL = 0.1;
 const SENTENCE_SOUND_VOL = 0.1;
 const TIME_SOUND_VOL = 0.1;
+const TIME_LIMIT_SOUND_VOL = 0.5;
 const CORRECT_SOUND_VOL = 0.1;
 const DESCRIPTION_SOUND_VOL = 0.1;
 
@@ -47,13 +47,12 @@ export default class Slide {
   constructor (opts = {}) {
     this.num = opts.num;// 問題番号
     this.event = 0;// イベント進行状況
+    this.timelimit = 0;
 
     this.question;
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
     });// end timestamp
-    // this.soundManager = new SoundManager({
-    // });// end soundManager
     this.soundManager = opts.soundManager;
     this.painter = opts.painter;
 
@@ -76,6 +75,7 @@ export default class Slide {
       numberCall: '../sounds/number.mp3',
       sentenceCall: '../sounds/se_maoudamashii_system04.mp3',
       timeCall: '../sounds/se_maoudamashii_system40.mp3',
+      timeLimitCall: '../sounds/se_maoudamashii_system01.mp3',
       correctCall: '../sounds/se_maoudamashii_system48.mp3',
       descriptionCall: '../sounds/se_maoudamashii_system10.mp3',
     }// end audio
@@ -154,14 +154,17 @@ export default class Slide {
     const v = pureTime >= TIME_DURATION ? 1 : pureTime / TIME_DURATION;
     let time = this.timestamp.countDown(this.timestamp.timer[TIME_E_NUM - 1], TIME_LIMIT);
 
-    if (time < TIME_LASTDOWN + 1) {
-      time = Math.floor(time) +'';
-    } else {
-      if (time < 10)
-        time = '0'+ time;
-      if ((time +'').split('').length == 2)
-        time = time +'.00';
-      time = (time +'00').slice(0, 5);
+    if (time < 10)
+      time = '0'+ time;
+    if ((time +'').split('').length == 2)
+      time = time +'.00';
+    time = (time +'00').slice(0, 5);
+
+    if (!this.timelimit && time == '00.00') {
+      this.timelimit ^= 1;
+      this.soundManager.play(this.audio.timeLimitCall, {
+        volume: TIME_LIMIT_SOUND_VOL
+      });// end play
     }// end if
 
     this.painter.ctx.save();
