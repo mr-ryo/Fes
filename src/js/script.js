@@ -14,7 +14,7 @@ import Painter from './lib/Painter.js';
 import $ from 'jquery';
 
 /*
-* ---定数---
+* ------
 */
 const SLIDE_LEN = 10;
 const KEY_UP = 38;
@@ -29,20 +29,15 @@ const PARTICLE_PROB = 20;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
+const BGM_VOLUME = 0.1;
 const DISP_WIDTH = $(window).width();
 const DISP_HEIGHT = $(window).height();
 
-/*
-* ---Path---
-*/
 const RESOURCE_PATH = '../images/';
 const resource = {
   bgm: '../sounds/bgm_maoudamashii_cyber29.mp3'
 }// end resource
 
-/*
-* ---インスタンス化---
-*/
 const timestamp = new Timestamp({
 });// end timestamp
 const painter = new Painter({
@@ -53,9 +48,6 @@ const painter = new Painter({
 const soundManager = new SoundManager({
 });// end soundManager
 
-/*
-* ------
-*/
 const wrap = $('.slideWrap');
 const slide = [];
 let particles = [];
@@ -241,7 +233,7 @@ orderQuestion(slide, Object.keys(json).length);
 gridExpand(lines);
 soundManager.play(resource.bgm, {
   loop: true,
-  volume: 0.1
+  volume: BGM_VOLUME
 });// end play
 masterDraw();
 
