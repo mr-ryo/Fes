@@ -64,12 +64,7 @@ export default class Painter {
   }// end constructor
 
   clearCanvas () {
-    const loop = () => {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      window.requestAnimationFrame(loop);
-    }// end loop
-
-    window.requestAnimationFrame(loop);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }// end clearCanvas
 
   alignImage (img, opts = {}) {

@@ -25,7 +25,8 @@ const KEY_COLOR = 67;
 const RED_LIMIT = 10;
 const GREEN_LIMIT = 150;
 const BLUE_LIMIT = 150;
-const PARTICLE_PROB = 30;
+const PARTICLE_PROB = 20;
+const PARTICLE_LIMIT = 10;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
@@ -120,7 +121,7 @@ const paintBackGround = (palette1, palette2) => {
 const particleExpand = (array) => {
   const birth = Math.floor(Math.random() * PARTICLE_PROB);
 
-  if (!birth) {
+  if (!birth && array.length < PARTICLE_LIMIT) {
     let method;
 
     switch (Math.floor(Math.random() * 3)) {
@@ -207,9 +208,8 @@ const addBackGround = () => {
 }// end addBackGround
 
 const masterDraw = () => {
-  painter.clearCanvas();
-
   const loop = () => {
+    painter.clearCanvas();
     addBackGround();
     slide[index].addElements();
     window.requestAnimationFrame(loop);
