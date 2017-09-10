@@ -4,13 +4,26 @@ import Timestamp from './Timestamp.js';
 
 const TIME_LIMIT = 10000;
 const UNDER_POSITION = 300;
+// 問題番号
 const NUMBER_DURATION = 300;
+const NUMBER_OFFSETX = 10;
+const NUMBER_OFFSETY = 10;
+const NUMBER_WIDTH = 200;
 const NUMBER_INITIAL_POSITION = -25;
+// 問題文
 const SENTENCE_DURATION = 300;
+const SENTENCE_SCALE = 0.6;
+// タイマー
 const TIME_DURATION = 500;
+const TIME_OFFSETX = 0;
+const TIME_OFFSETY = 10;
+const TIME_WIDTH = 100;
 const TIME_LASTDOWN = 5;
+// 正解
 const CORRECT_DURATION = 300;
+// 解説
 const DESCRIPTION_DURATION = 300;
+const DESCRIPTION_SCALE = 0.6;
 const DESCRIPTION_INITIAL_POSITION = 25;
 // E_NUM (EVENT_NUMBER)
 const NUMBER_E_NUM = 1;
@@ -18,6 +31,12 @@ const SENTENCE_E_NUM = 2;
 const TIME_E_NUM = 3;
 const CORRECT_E_NUM = 4;
 const DESCRIPTION_E_NUM = 5;
+// サウンドボリューム
+const NUMBER_SOUND_VOL = 0.1;
+const SENTENCE_SOUND_VOL = 0.1;
+const TIME_SOUND_VOL = 0.1;
+const CORRECT_SOUND_VOL = 0.1;
+const DESCRIPTION_SOUND_VOL = 0.1;
 
 const RESOURCE_PATH = '../images/';
 const CORRECT_PATH = 'correct/';
@@ -94,10 +113,10 @@ export default class Slide {
     this.painter.sharpImage(this.resource['number'+ this.num], {
       basisX: 'left',
       basisY: 'top',
-      offsetX: 10,
-      offsetY: 10 + NUMBER_INITIAL_POSITION * (1 - v),
+      offsetX: NUMBER_OFFSETX,
+      offsetY: NUMBER_OFFSETY + NUMBER_INITIAL_POSITION * (1 - v),
       basisSize: 'width',
-      w: 200,
+      w: NUMBER_WIDTH,
       h: 0
     });// end sharpImage
     this.painter.ctx.restore();
@@ -116,7 +135,7 @@ export default class Slide {
         x: 0.5,
         y: 0.5,
         fit: 'height',
-        scale: 0.6
+        scale: SENTENCE_SCALE
       });// end alignImage
       offsetY = UNDER_POSITION;
     }// end if
@@ -150,9 +169,9 @@ export default class Slide {
     this.painter.tickTime(time, {
       basisX: 'right',
       basisY: 'top',
-      offsetX: 0,
-      offsetY: 10,
-      w: 100 * (2 - v)
+      offsetX: TIME_OFFSETX,
+      offsetY: TIME_OFFSETY,
+      w: TIME_WIDTH * (2 - v)
     });// end tickTime
     this.painter.ctx.restore();
   }// end addTickTime
@@ -185,7 +204,7 @@ export default class Slide {
         x: 0.5,
         y: 0.5,
         fit: 'height',
-        scale: 0.6,
+        scale: DESCRIPTION_SCALE,
         offsetY: DESCRIPTION_INITIAL_POSITION * (1 - v)
       });// end alignImage
     }// end if
@@ -208,27 +227,27 @@ export default class Slide {
       switch (this.event) {
         case DESCRIPTION_E_NUM:
           this.soundManager.play(this.audio.descriptionCall, {
-            volume: 0.1
+            volume: DESCRIPTION_SOUND_VOL
           });// end play
           break;
         case CORRECT_E_NUM:
           this.soundManager.play(this.audio.correctCall, {
-            volume: 0.1
+            volume: CORRECT_SOUND_VOL
           });// end play
           break;
         case TIME_E_NUM:
           this.soundManager.play(this.audio.timeCall, {
-            volume: 0.1
+            volume: TIME_SOUND_VOL
           });// end play
           break;
         case SENTENCE_E_NUM:
           this.soundManager.play(this.audio.sentenceCall, {
-            volume: 0.1
+            volume: SENTENCE_SOUND_VOL
           });// end play
           break;
         case NUMBER_E_NUM:
           this.soundManager.play(this.audio.numberCall, {
-            volume: 0.1
+            volume: NUMBER_SOUND_VOL
           });// end play
           break;
         default:

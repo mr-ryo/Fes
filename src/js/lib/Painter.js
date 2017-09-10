@@ -5,6 +5,8 @@ const COMMON_PATH = 'common/';
 const NUMBERS_PATH = 'numbers/';
 const ALPHABETS_PATH = 'alphabets/';
 
+const DREAM_COLOR = 'rgb(255, 216, 45)';
+
 export default class Painter {
   constructor (opts = {}) {
     this.canvas = opts.canvas;
@@ -198,7 +200,7 @@ export default class Painter {
     this.ctx.save();
     this.ctx.globalAlpha = 0.6;
     this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
+    this.ctx.strokeStyle = DREAM_COLOR;
     this.ctx.beginPath();
     this.ctx.moveTo(opts.x1, opts.y1);
     this.ctx.lineTo(opts.x2, opts.y2);
@@ -218,7 +220,7 @@ export default class Painter {
     this.ctx.save();
     this.ctx.globalAlpha = alpha;
     this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = 'rgb(255, 216, 45)';
+    this.ctx.strokeStyle = DREAM_COLOR;
     this.ctx.beginPath();
     this.ctx.arc(x, y, r, startAngle, endAngle, false);
     this.ctx.stroke();
