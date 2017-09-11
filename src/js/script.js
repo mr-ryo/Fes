@@ -23,7 +23,8 @@ const BOOK = {
 
 const resource = {
   bgm_title: '../sounds/bgm_maoudamashii_fantasy13.mp3',
-  bgm_quiz: '../sounds/bgm_maoudamashii_cyber29.mp3',
+  bgm_start: '../sounds/bgm_maoudamashii_cyber29.mp3',
+  bgm_quiz: '../sounds/game_maoudamashii_7_event27.mp3',
   bgm_ending: '../sounds/bgm_maoudamashii_fantasy10.mp3'
 }// end resource
 
@@ -40,6 +41,8 @@ const makeBook = () => {
         file = resource.bgm_title;
         break;
       case BOOK.START:
+        file = resource.bgm_start;
+        break;
       case BOOK.QUIZ:
         file = resource.bgm_quiz;
         break;
