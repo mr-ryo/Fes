@@ -35,18 +35,19 @@ const makeBook = () => {
   let file;
 
   for (const key in BOOK) {
-
     switch (BOOK[key]) {
       case BOOK.TITLE:
         file = resource.bgm_title;
         break;
       case BOOK.START:
+      case BOOK.QUIZ:
         file = resource.bgm_quiz;
         break;
       case BOOK.ENDING:
         file = resource.bgm_ending;
         break;
       default:
+        file = null;
         break;
     }// end switch
 
@@ -58,14 +59,14 @@ const makeBook = () => {
       book: BOOK,
       soundFile: file,
       soundLoop: true,
-      soundVolume: 0.1
+      soundVolume: BGM_VOLUME
     }));// ene push
   }// end for
 
   page[BOOK.QUIZ].addQuestionSlide({
     size: SLIDE_LEN
   });// end addQuestionSlide
-}// end addPage
+}// end makeBook
 
 const masterDraw = () => {
   const loop = () => {

@@ -8,6 +8,9 @@ import Slide from './Slide.js';
 const RESOURCE_PATH = '../images/';
 const TITLE_PATH = 'title/';
 
+const MOVIE_WIDTH = 1920;
+const MOVIE_HEIGHT = 1080;
+
 export default class Page {
   constructor (opts = {}) {
     this.pageNo = opts.num;
@@ -15,6 +18,7 @@ export default class Page {
     this.height = opts.h;
     this.index = 0;
     this.bgm;
+    this.mv;
     this.slide = [];
     this.book = opts.book;
     this.soundManager = new SoundManager({
@@ -37,6 +41,10 @@ export default class Page {
       title: RESOURCE_PATH + TITLE_PATH +'logo.png',
       start: RESOURCE_PATH + TITLE_PATH +'start.png'
     }// end resource
+
+    this.movies = {
+      opening: '../movies/test.mp4'
+    }// end movies
   }// end constructor
 
   drawSlide () {
@@ -96,17 +104,28 @@ export default class Page {
   }// end addTitle
 
   addMovie () {
+    if (this.mv == null) {
+      const movie = document.createElement('video');
+      movie.src = this.movies.opening;
+      movie.width = MOVIE_WIDTH;
+      movie.height = MOVIE_HEIGHT;
+      this.mv = movie;
+      this.mv.play();
+    }// end if
+
+    this.painter.alignMovie(this.mv, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'width'
+    });// end alignMovie
   }// end addMovie
 
   addStart () {
-    this.painter.ctx.save();
-    this.painter.ctx.globalAlpha = 0.9;
     this.painter.alignImage(this.resource.start, {
       x: 0.5,
       y: 0.5,
       fit: 'width'
     });// end alignImage
-    this.painter.ctx.restore();
   }// end addStart
 
   addQuestionSlide (opts = {}) {

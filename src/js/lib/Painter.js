@@ -238,4 +238,42 @@ export default class Painter {
     this.ctx.rect(x, y, w, h);
     this.ctx.stroke();
   }// end drawSquare
+
+  alignMovie (movie, opts = {}) {
+    const scale = isNaN(opts.scale) ? 1 : opts.scale;
+    const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
+    const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
+    let x = isNaN(opts.x) ? 0 : opts.x;
+    let y = isNaN(opts.y) ? 0 : opts.y;
+    let drawWidth = 0;
+    let drawHeight = 0;
+
+    switch (opts.fit) {
+      case 'width':
+        drawWidth = this.canvas.width;
+        drawHeight = this.canvas.width * (movie.height / movie.width);
+        break;
+      case 'height':
+        drawWidth = this.canvas.height * (movie.width / movie.height);
+        drawHeight = this.canvas.height;
+        break;
+      default:
+        drawWidth = movie.width;
+        drawHeight = movie.height;
+        break;
+    }// end switch
+
+    drawWidth *= scale;
+    drawHeight *= scale;
+    x = offsetX + (this.canvas.width - drawWidth) * x;
+    y = offsetY + (this.canvas.height - drawHeight) * y;
+
+    this.ctx.drawImage(
+      movie,
+      x,
+      y,
+      drawWidth,
+      drawHeight
+    );// end alignImage
+  }// end alignMovie
 };// end Painter
