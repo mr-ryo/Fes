@@ -1,7 +1,7 @@
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
-const TIME_LIMIT = 10000;
+const TIME_LIMIT = 15000;
 const UNDER_POSITION = 300;
 // 問題番号
 const NUMBER_DURATION = 300;
@@ -33,10 +33,10 @@ const DESCRIPTION_E_NUM = 5;
 // サウンドボリューム
 const NUMBER_SOUND_VOL = 0.1;
 const SENTENCE_SOUND_VOL = 0.1;
-const TIME_SOUND_VOL = 0.1;
-const TIME_LIMIT_SOUND_VOL = 0.5;
-const CORRECT_SOUND_VOL = 0.1;
-const DESCRIPTION_SOUND_VOL = 0.1;
+const TIME_SOUND_VOL = 0.2;
+const TIME_LIMIT_SOUND_VOL = 0.2;
+const CORRECT_SOUND_VOL = 0.2;
+const DESCRIPTION_SOUND_VOL = 0.2;
 
 const RESOURCE_PATH = '../images/';
 const CORRECT_PATH = 'correct/';
