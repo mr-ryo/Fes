@@ -5,13 +5,23 @@ import Painter from './Painter.js';
 import BackGround from './BackGround.js';
 import Slide from './Slide.js';
 
+const RESOURCE_PATH = '../images/';
+const TITLE_PATH = 'title/';
+
 export default class Page {
   constructor (opts = {}) {
+    this.pageNo = opts.num;
     this.width = opts.w;
     this.height = opts.h;
     this.index = 0;
+    this.bgm;
     this.slide = [];
-    this.soundManager = new SoundManager({});
+    this.book = opts.book;
+    this.soundManager = new SoundManager({
+      file: opts.soundFile,
+      loop: opts.soundLoop,
+      volume: opts.soundVolume
+    });// end soundManager
     this.painter = new Painter({
       canvas: opts.canvas,
       w: opts.w,
@@ -22,12 +32,36 @@ export default class Page {
       w: opts.w,
       h: opts.h
     });// end BackGround
+
+    this.resource = {
+      title: RESOURCE_PATH + TITLE_PATH +'logo.png',
+      start: RESOURCE_PATH + TITLE_PATH +'start.png'
+    }// end resource
   }// end constructor
 
   drawSlide () {
     this.painter.clearCanvas();
     this.backGround.addBackGround();
-    this.slide[this.index].addElements();
+
+    switch (this.pageNo) {
+      case this.book.TITLE:
+        this.addTitle();
+        break;
+      case this.book.MOVIE:
+        this.addMovie();
+        break;
+      case this.book.START:
+        this.addStart();
+        break;
+      case this.book.QUIZ:
+        this.slide[this.index].addElements();
+        break;
+      case this.book.ENDING:
+        this.addEnding();
+        break;
+      default:
+        break;
+    }//end switch
   }// end drawSlide
 
   moveSlide (direction) {
@@ -37,9 +71,10 @@ export default class Page {
           --this.index;
         break;
       case 'down':
-        if (this.index < this.slide.length - 1)
+        if (this.index < this.slide.length - 1) {
           ++this.index;
-          // changeColor(afterColor);
+          this.backGround.changeColor();
+        }// end if
         break;
       case 'left':
         this.slide[this.index].recesEvent();
@@ -52,6 +87,28 @@ export default class Page {
     }// end switch
   }// ene moveSlide
 
+  addTitle () {
+    this.painter.alignImage(this.resource.title, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'height'
+    });// end alignImage
+  }// end addTitle
+
+  addMovie () {
+  }// end addMovie
+
+  addStart () {
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = 0.9;
+    this.painter.alignImage(this.resource.start, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'width'
+    });// end alignImage
+    this.painter.ctx.restore();
+  }// end addStart
+
   addQuestionSlide (opts = {}) {
     const question_stack = [];
     const json_len = Object.keys(json).length;
@@ -62,7 +119,6 @@ export default class Page {
     for (let i = 0; i < size; ++i) {
       this.slide[i] = new Slide({
         num: (i + 1),
-        soundManager: this.soundManager,
         painter: this.painter
       });// end Slide
 
@@ -92,11 +148,6 @@ export default class Page {
     }// end for
   }// end addQuestionSlide
 
-  addSound (opts = {}) {
-    soundManager.play(opts.file, {
-      loop: opts.loop,
-      volume: opts.soundVolume
-    });// play
-  }// end addSound
-
+  addEnding () {
+  }// end addEnding
 };// end Page

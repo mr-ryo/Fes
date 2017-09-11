@@ -6,27 +6,31 @@ const RED_LIMIT = 10;
 const GREEN_LIMIT = 150;
 const BLUE_LIMIT = 150;
 const PARTICLE_PROB = 20;
-const PARTICLE_LIMIT = 8;
+const PARTICLE_LIMIT = 15;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
-
-let bgColor = {
-  r: 5,
-  g: 52,
-  b: 55
-}// end bgColor
-let afterColor = {
-  r: bgColor.r,
-  g: bgColor.g,
-  b: bgColor.b
-}// end afterColor
+const BG_COLOR = {
+  R: 5,
+  G: 55,
+  B: 55
+}// end BG_COLOR
 
 export default class BackGround {
   constructor (opts = {}) {
     this.elements = [];
     this.w = opts.w;
     this.h = opts.h;
+    this.color = {
+      r: BG_COLOR.R,
+      g: BG_COLOR.G,
+      b: BG_COLOR.B
+    }// end color
+    this.target = {
+      r: this.color.r,
+      g: this.color.g,
+      b: this.color.b
+    }// end target
 
     this.painter = new Painter({
       canvas: opts.canvas,
@@ -36,17 +40,15 @@ export default class BackGround {
   }// end constructor
 
   addBackGround () {
-    this.paintBackGround(bgColor, afterColor);
+    this.paintBackGround(this.color, this.target);
     this.particleExpand();
     // gridMove(lines);
   }// end addBackGround
 
-  changeColor (palette) {
-    palette.r = Math.floor(Math.random() * RED_LIMIT);
-    palette.g = Math.floor(Math.random() * GREEN_LIMIT);
-    palette.b = Math.floor(Math.random() * BLUE_LIMIT);
-
-    return palette;
+  changeColor () {
+    this.target.r = Math.floor(Math.random() * RED_LIMIT);
+    this.target.g = Math.floor(Math.random() * GREEN_LIMIT);
+    this.target.b = Math.floor(Math.random() * BLUE_LIMIT);
   }// end changeColor
 
   paintBackGround (palette1, palette2) {

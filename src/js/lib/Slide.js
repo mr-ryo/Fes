@@ -1,3 +1,4 @@
+import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
@@ -53,7 +54,7 @@ export default class Slide {
     this.timestamp = new Timestamp({
       duration: TIME_LIMIT
     });// end timestamp
-    this.soundManager = opts.soundManager;
+    this.soundManager = new SoundManager({});
     this.painter = opts.painter;
 
     this.resource = {
@@ -69,7 +70,7 @@ export default class Slide {
       number8: RESOURCE_PATH + Q_NUMBERS_PATH +'number8.png',
       number9: RESOURCE_PATH + Q_NUMBERS_PATH +'number9.png',
       number10: RESOURCE_PATH + Q_NUMBERS_PATH +'number10.png',
-    };// end resource
+    }// end resource
 
     this.audio = {
       numberCall: '../sounds/number.mp3',
@@ -229,29 +230,29 @@ export default class Slide {
 
       switch (this.event) {
         case DESCRIPTION_E_NUM:
-          this.soundManager.play(this.audio.descriptionCall, {
+          this.soundManager.soundEffect(this.audio.descriptionCall, {
             volume: DESCRIPTION_SOUND_VOL
-          });// end play
+          });// end soundEffect
           break;
         case CORRECT_E_NUM:
-          this.soundManager.play(this.audio.correctCall, {
+          this.soundManager.soundEffect(this.audio.correctCall, {
             volume: CORRECT_SOUND_VOL
-          });// end play
+          });// end soundEffect
           break;
         case TIME_E_NUM:
-          this.soundManager.play(this.audio.timeCall, {
+          this.soundManager.soundEffect(this.audio.timeCall, {
             volume: TIME_SOUND_VOL
-          });// end play
+          });// end soundEffect
           break;
         case SENTENCE_E_NUM:
-          this.soundManager.play(this.audio.sentenceCall, {
+          this.soundManager.soundEffect(this.audio.sentenceCall, {
             volume: SENTENCE_SOUND_VOL
-          });// end play
+          });// end soundEffect
           break;
         case NUMBER_E_NUM:
-          this.soundManager.play(this.audio.numberCall, {
+          this.soundManager.soundEffect(this.audio.numberCall, {
             volume: NUMBER_SOUND_VOL
-          });// end play
+          });// end soundEffect
           break;
         default:
           break;
