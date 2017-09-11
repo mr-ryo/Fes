@@ -163,9 +163,9 @@ export default class Slide {
 
     if (!this.timelimit && time == '00.00') {
       this.timelimit ^= 1;
-      this.soundManager.play(this.audio.timeLimitCall, {
+      this.soundManager.soundEffect(this.audio.timeLimitCall, {
         volume: TIME_LIMIT_SOUND_VOL
-      });// end play
+      });// end soundEffect
     }// end if
 
     this.painter.ctx.save();
