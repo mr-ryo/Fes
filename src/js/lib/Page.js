@@ -40,7 +40,9 @@ export default class Page {
 
     this.resource = {
       title: RESOURCE_PATH + TITLE_PATH +'logo.png',
-      start: RESOURCE_PATH + TITLE_PATH +'start.png'
+      start: RESOURCE_PATH + TITLE_PATH +'start.png',
+      maruProf: RESOURCE_PATH + TITLE_PATH +'maru_prof.png',
+      batsuProf: RESOURCE_PATH + TITLE_PATH +'batsu_prof.png'
     }// end resource
 
     this.movies = {
@@ -124,6 +126,22 @@ export default class Page {
   addStart () {
     this.painter.ctx.save();
     this.painter.ctx.globalAlpha = 0.9;
+    this.painter.alignImage(this.resource.maruProf, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'height',
+      scale: 0.3,
+      offsetX: 300,
+      offsetY: 250
+    });// end alignImage
+    this.painter.alignImage(this.resource.batsuProf, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'height',
+      scale: 0.3,
+      offsetX: -300,
+      offsetY: -250
+    });// end alignImage
     this.painter.alignImage(this.resource.start, {
       x: 0.5,
       y: 0.5,
