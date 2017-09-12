@@ -51,9 +51,7 @@ export default class Slide {
     this.timelimit = 0;
 
     this.question;
-    this.timestamp = new Timestamp({
-      duration: TIME_LIMIT
-    });// end timestamp
+    this.timestamp = new Timestamp({});
     this.soundManager = new SoundManager({});
     this.painter = opts.painter;
 
