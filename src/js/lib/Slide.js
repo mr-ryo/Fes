@@ -2,6 +2,10 @@ import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
+const RESOURCE_PATH = '../images/';
+const CORRECT_PATH = 'correct/';
+const Q_NUMBERS_PATH = 'q_numbers/';
+
 const TIME_LIMIT = 15000;
 const UNDER_POSITION = 300;
 // 問題番号
@@ -38,10 +42,6 @@ const TIME_SOUND_VOL = 0.2;
 const TIME_LIMIT_SOUND_VOL = 0.2;
 const CORRECT_SOUND_VOL = 0.2;
 const DESCRIPTION_SOUND_VOL = 0.2;
-
-const RESOURCE_PATH = '../images/';
-const CORRECT_PATH = 'correct/';
-const Q_NUMBERS_PATH = 'q_numbers/';
 
 export default class Slide {
 

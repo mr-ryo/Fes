@@ -1,10 +1,9 @@
-const TIME_LENGTH = 5;
-
 const RESOURCE_PATH = '../images/';
 const COMMON_PATH = 'common/';
 const NUMBERS_PATH = 'numbers/';
 const ALPHABETS_PATH = 'alphabets/';
 
+const TIME_LENGTH = 5;
 const DREAM_COLOR = 'rgb(255, 216, 45)';
 
 export default class Painter {
