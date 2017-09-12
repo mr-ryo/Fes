@@ -101,15 +101,23 @@ $(window).on('keydown', (e) => {
       }// end if
       break;
     case KEY_LEFT:
+      if (index != BOOK.QUIZ)
+        return;
       page[index].moveSlide('left');
       break;
     case KEY_UP:
+      if (index != BOOK.QUIZ)
+        return;
       page[index].moveSlide('up');
       break;
     case KEY_RIGHT:
+      if (index != BOOK.QUIZ)
+        return;
       page[index].moveSlide('right');
       break;
     case KEY_DOWN:
+      if (index != BOOK.QUIZ)
+        return;
       page[index].moveSlide('down');
       break;
     case KEY_COLOR:
