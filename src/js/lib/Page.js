@@ -21,6 +21,7 @@ export default class Page {
     this.mv;
     this.slide = [];
     this.book = opts.book;
+
     this.soundManager = new SoundManager({
       file: opts.soundFile,
       loop: opts.soundLoop,

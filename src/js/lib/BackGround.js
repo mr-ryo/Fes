@@ -6,7 +6,7 @@ const RED_LIMIT = 10;
 const GREEN_LIMIT = 150;
 const BLUE_LIMIT = 150;
 const PARTICLE_PROB = 20;
-const PARTICLE_LIMIT = 15;
+const PARTICLE_LIMIT = 7;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
@@ -91,15 +91,16 @@ export default class BackGround {
       }));// end push
     }// end if
 
+    let count = 0;
     this.elements.forEach((particle, index, array) => {
       particle.addParticle();
+      if (particle.getNotice())
+        ++count;
     });// end forEach
 
-    this.elements.forEach((particle, index, array) => {
-      if (particle != null)// エラー回避
-        if (particle.getNotice())
-          this.elements.shift();
-    });// end forEach
+    for (let i = 0, size = count; i < size; ++i) {
+      this.elements.shift();
+    }// end for
   }// end particleExpand
 
   gridExpand () {
