@@ -21,6 +21,7 @@ export default class BackGround {
     this.elements = [];
     this.w = opts.w;
     this.h = opts.h;
+
     this.color = {
       r: BG_COLOR.R,
       g: BG_COLOR.G,
@@ -39,10 +40,30 @@ export default class BackGround {
     });// end Painter
   }// end constructor
 
-  addBackGround () {
-    this.paintBackGround(this.color, this.target);
-    this.particleExpand();
-    // gridMove(lines);
+  addBackGround (book, no) {
+    switch (no) {
+      case book.TITLE:
+        if (!this.elements.length)
+          this.gridExpand();
+        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        this.gridMove();
+        break;
+      case book.MOVIE:
+        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        break;
+      case book.START:
+        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        break;
+      case book.QUIZ:
+        this.paintBackGround(this.color, this.target);
+        this.particleExpand();
+        break;
+      case book.ENDING:
+        this.paintBackGround({r:0,g:0,b:50}, {r:0,g:0,b:50});
+        break;
+      default:
+        break;
+    }// end switch
   }// end addBackGround
 
   changeColor () {
@@ -131,6 +152,11 @@ export default class BackGround {
     let endY;
 
     this.elements.forEach((key, index, array) => {
+      key.calcPoint({
+        w: this.w,
+        h: this.h
+      });// end calcPoint
+
       if (key.x == 0) {
         key.y += (key.y < key.point ? 1 : -1);
         endY = key.y;
@@ -141,7 +167,7 @@ export default class BackGround {
         endY = this.h;
       }// end if
 
-      painter.drawLine({
+      this.painter.drawLine({
         x1: key.x,
         y1: key.y,
         x2: endX,

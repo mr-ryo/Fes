@@ -50,7 +50,7 @@ export default class Page {
 
   drawSlide () {
     this.painter.clearCanvas();
-    this.backGround.addBackGround();
+    this.backGround.addBackGround(this.book, this.pageNo);
 
     switch (this.pageNo) {
       case this.book.TITLE:
