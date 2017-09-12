@@ -91,7 +91,6 @@ export default class BackGround {
   }// end paintBackGround
 
   fireworksExpand () {
-    console.log(this.elements.length);
     const birth = Math.floor(Math.random() * FIREWORKS_PROB);
 
     if (!birth && this.elements.length < FIREWORKS_LIMIT) {
