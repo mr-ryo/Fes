@@ -49,7 +49,7 @@ export default class Page {
   }// end constructor
 
   drawSlide () {
-    this.painter.clearCanvas();
+    // this.painter.clearCanvas();
     this.backGround.addBackGround(this.book, this.pageNo);
 
     switch (this.pageNo) {
@@ -122,11 +122,14 @@ export default class Page {
   }// end addMovie
 
   addStart () {
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = 0.9;
     this.painter.alignImage(this.resource.start, {
       x: 0.5,
       y: 0.5,
       fit: 'width'
     });// end alignImage
+    this.painter.ctx.restore();
   }// end addStart
 
   addQuestionSlide (opts = {}) {

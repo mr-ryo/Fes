@@ -1,10 +1,14 @@
 import Painter from './Painter.js';
 import Line from './Line.js';
 import Particle from './Particle.js';
+import Fireworks from './Fireworks.js';
 
 const RED_LIMIT = 10;
 const GREEN_LIMIT = 150;
 const BLUE_LIMIT = 150;
+const FIREWORKS_PROB = 100;
+const FIREWORKS_VOLUME = 300;
+const FIREWORKS_LIMIT = 3;
 const PARTICLE_PROB = 20;
 const PARTICLE_LIMIT = 7;
 const ROW_LINES = 10;
@@ -61,6 +65,7 @@ export default class BackGround {
         break;
       case book.ENDING:
         this.paintBackGround({r:0,g:0,b:50}, {r:0,g:0,b:50});
+        this.fireworksExpand();
         break;
       default:
         break;
@@ -84,6 +89,33 @@ export default class BackGround {
     this.painter.ctx.fillStyle = 'rgb('+ palette1.r +','+ palette1.g +','+ palette1.b +')';
     this.painter.ctx.fillRect(0, 0, this.w, this.h);
   }// end paintBackGround
+
+  fireworksExpand () {
+    console.log(this.elements.length);
+    const birth = Math.floor(Math.random() * FIREWORKS_PROB);
+
+    if (!birth && this.elements.length < FIREWORKS_LIMIT) {
+      const x = Math.floor(Math.random() * this.w);
+      const y = Math.floor(Math.random() * this.h);
+      this.elements.push(new Fireworks({
+        x: x,
+        y: y,
+        volume: FIREWORKS_VOLUME,
+        painter: this.painter
+      }));// end push
+    }// end if
+
+    let count = 0;
+    this.elements.forEach((fireworks, index, array) => {
+      fireworks.addFireworks();
+      if (fireworks.getNotice())
+        ++count;
+    });// end forEach
+
+    for (let i = 0, size = count; i < size; ++i) {
+      this.elements.shift();
+    }// end for
+  }// end FireworksExpand
 
   particleExpand (color) {
     const birth = Math.floor(Math.random() * PARTICLE_PROB);

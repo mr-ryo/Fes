@@ -213,19 +213,16 @@ export default class Painter {
     const x = isNaN(opts.x) ? 0 : opts.x;
     const y = isNaN(opts.y) ? 0 : opts.y;
     const r = isNaN(opts.r) ? 0 : opts.r;
-    const w = isNaN(opts.w) ? 0 : opts.w;
-    const alpha = isNaN(opts.alpha) ? 1 : opts.alpha;
+    const method = opts.method;
     const startAngle = 0;
     const endAngle = 360 * Math.PI / 180;
 
-    this.ctx.save();
-    this.ctx.globalAlpha = alpha;
-    this.ctx.lineWidth = w;
-    this.ctx.strokeStyle = DREAM_COLOR;
     this.ctx.beginPath();
     this.ctx.arc(x, y, r, startAngle, endAngle, false);
-    this.ctx.stroke();
-    this.ctx.restore();
+    if (method == 'fill')
+      this.ctx.fill();
+    else
+      this.ctx.stroke();
   }// end drawCircle
 
   drawSquare (opts = {}) {

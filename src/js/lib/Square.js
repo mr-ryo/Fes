@@ -13,7 +13,6 @@ export default class Square {
     this.w = opts.w;
     this.h = opts.h;
     this.color = opts.color;
-    console.log(this.color);
   }// end constructor
 
   addSquare (v1, v2, volume) {
@@ -25,7 +24,7 @@ export default class Square {
 
     this.painter.ctx.save();
     this.painter.ctx.globalAlpha = ALPHA;
-    this.painter.ctx.strokeStyle = 'rgb('+ COLOR.R +','+ COLOR.G +','+ COLOR.B +')'
+    this.painter.ctx.strokeStyle = 'rgb('+ this.color.r +','+ this.color.g +','+ this.color.b +')'
     this.painter.drawSquare({
       x: x,
       y: y,
