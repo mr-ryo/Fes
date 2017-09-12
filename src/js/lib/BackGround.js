@@ -52,11 +52,12 @@ export default class BackGround {
         this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
         break;
       case book.START:
-        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        this.paintBackGround({r:10,g:0,b:50}, {r:10,g:0,b:50});
+        this.particleExpand({r: 45, g: 216, b: 255});
         break;
       case book.QUIZ:
         this.paintBackGround(this.color, this.target);
-        this.particleExpand();
+        this.particleExpand({r: 255, g: 216, b: 45});
         break;
       case book.ENDING:
         this.paintBackGround({r:0,g:0,b:50}, {r:0,g:0,b:50});
@@ -84,7 +85,7 @@ export default class BackGround {
     this.painter.ctx.fillRect(0, 0, this.w, this.h);
   }// end paintBackGround
 
-  particleExpand () {
+  particleExpand (color) {
     const birth = Math.floor(Math.random() * PARTICLE_PROB);
 
     if (!birth && this.elements.length < PARTICLE_LIMIT) {
@@ -108,6 +109,7 @@ export default class BackGround {
         x: Math.floor(Math.random() * this.w),
         y: Math.floor(Math.random() * this.h),
         method: method,
+        color: color,
         painter: this.painter
       }));// end push
     }// end if

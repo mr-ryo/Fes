@@ -12,6 +12,8 @@ export default class Square {
     this.y = opts.y;
     this.w = opts.w;
     this.h = opts.h;
+    this.color = opts.color;
+    console.log(this.color);
   }// end constructor
 
   addSquare (v1, v2, volume) {

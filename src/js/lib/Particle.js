@@ -16,6 +16,8 @@ export default class Particle {
     this.x = opts.x;
     this.y = opts.y;
     this.method = opts.method;
+    this.color = opts.color;
+
     this.painter = opts.painter;
     this.timestamp = new Timestamp({
     });// end timestamp
@@ -85,7 +87,8 @@ export default class Particle {
             x: this.x,
             y: this.y + (SQUARE_HEIGHT + GRAIN_SPACE) * (index + 1),
             w: SQUARE_WIDTH,
-            h: SQUARE_HEIGHT
+            h: SQUARE_HEIGHT,
+            color: this.color
           }));// end push
         }// end if
       }// end if
@@ -120,7 +123,8 @@ export default class Particle {
             x: this.x + (SQUARE_WIDTH + GRAIN_SPACE) * (index + 1),
             y: this.y,
             w: SQUARE_WIDTH,
-            h: SQUARE_HEIGHT
+            h: SQUARE_HEIGHT,
+            color: this.color
           }));// end push
         }// end if
       }// end if
