@@ -9,6 +9,7 @@ import Slide from './Slide.js';
 const RESOURCE_PATH = '../images/';
 const TITLE_PATH = 'title/';
 const CORRECT_PATH = 'correct/';
+const ENDING_PATH = 'ending/';
 
 const MOVIE_WIDTH = 1920;
 const MOVIE_HEIGHT = 1080;
@@ -50,6 +51,7 @@ export default class Page {
       title: RESOURCE_PATH + TITLE_PATH +'logo.png',
       correctSuccess: RESOURCE_PATH + CORRECT_PATH +'maru.png',
       correctFailure: RESOURCE_PATH + CORRECT_PATH +'batsu.png',
+      gameClear: RESOURCE_PATH + ENDING_PATH +'clear.png'
     }// end resource
 
     this.movies = {
@@ -208,5 +210,10 @@ export default class Page {
   }// end addQuestionSlide
 
   addEnding () {
+    this.painter.alignImage(this.resource.gameClear, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'width'
+    });// end alignImage
   }// end addEnding
 };// end Page

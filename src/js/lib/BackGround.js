@@ -3,10 +3,10 @@ import Line from './Line.js';
 import Particle from './Particle.js';
 import Fireworks from './Fireworks.js';
 
-const RED_LIMIT = 10;
-const GREEN_LIMIT = 255;
-const BLUE_LIMIT = 255;
-const FIREWORKS_PROB = 100;
+const RED_LIMIT = 0;
+const GREEN_LIMIT = 100;
+const BLUE_LIMIT = 100;
+const FIREWORKS_PROB = 50;
 const FIREWORKS_VOLUME = 300;
 const FIREWORKS_LIMIT = 3;
 const PARTICLE_PROB = 20;
@@ -15,9 +15,9 @@ const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
 const BG_COLOR = {
-  R: 5,
-  G: 55,
-  B: 55
+  R: 0,
+  G: 100,
+  B: 100
 }// end BG_COLOR
 
 export default class BackGround {
