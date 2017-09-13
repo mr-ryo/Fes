@@ -4,8 +4,8 @@ import Particle from './Particle.js';
 import Fireworks from './Fireworks.js';
 
 const RED_LIMIT = 10;
-const GREEN_LIMIT = 100;
-const BLUE_LIMIT = 100;
+const GREEN_LIMIT = 255;
+const BLUE_LIMIT = 255;
 const FIREWORKS_PROB = 100;
 const FIREWORKS_VOLUME = 300;
 const FIREWORKS_LIMIT = 3;
