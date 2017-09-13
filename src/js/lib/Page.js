@@ -17,7 +17,7 @@ const START_IMG_SCALE = 0.5;
 const START_IMG_OFFSET_X = 500;
 const START_IMG_OFFSET_Y = 200;
 const START_IMG_DURATION = 10000;
-const START_IMG_AMP = 30;
+const START_IMG_AMP = 20;
 
 export default class Page {
   constructor (opts = {}) {
