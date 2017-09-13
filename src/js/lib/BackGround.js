@@ -27,14 +27,14 @@ export default class BackGround {
     this.h = opts.h;
 
     this.color = {
+      r: 0,
+      g: 0,
+      b: 0
+    }// end color
+    this.target = {
       r: BG_COLOR.R,
       g: BG_COLOR.G,
       b: BG_COLOR.B
-    }// end color
-    this.target = {
-      r: this.color.r,
-      g: this.color.g,
-      b: this.color.b
     }// end target
 
     this.painter = new Painter({
@@ -49,22 +49,22 @@ export default class BackGround {
       case book.TITLE:
         if (!this.elements.length)
           this.gridExpand();
-        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        this.paintBackGround(this.color, {r:0,g:0,b:0});
         this.gridMove();
         break;
       case book.MOVIE:
-        this.paintBackGround({r:0,g:0,b:0}, {r:0,g:0,b:0});
+        this.paintBackGround(this.color, {r:0,g:0,b:0});
         break;
       case book.START:
-        this.paintBackGround({r:10,g:0,b:50}, {r:10,g:0,b:50});
-        this.particleExpand({r: 45, g: 216, b: 255});
+        this.paintBackGround(this.color, {r:50,g:0,b:0});
+        this.particleExpand({r: 255, g: 200, b: 50});
         break;
       case book.QUIZ:
         this.paintBackGround(this.color, this.target);
         this.particleExpand({r: 255, g: 216, b: 45});
         break;
       case book.ENDING:
-        this.paintBackGround({r:0,g:0,b:50}, {r:0,g:0,b:50});
+        this.paintBackGround(this.color, {r:0,g:0,b:50});
         this.fireworksExpand();
         break;
       default:

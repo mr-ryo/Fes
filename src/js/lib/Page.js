@@ -1,5 +1,6 @@
 import json from '../../config/question.json';
 
+import Timestamp from './Timestamp.js';
 import SoundManager from './SoundManager.js';
 import Painter from './Painter.js';
 import BackGround from './BackGround.js';
@@ -7,9 +8,15 @@ import Slide from './Slide.js';
 
 const RESOURCE_PATH = '../images/';
 const TITLE_PATH = 'title/';
+const CORRECT_PATH = 'correct/';
 
 const MOVIE_WIDTH = 1920;
 const MOVIE_HEIGHT = 1080;
+const START_IMG_SCALE = 0.5;
+const START_IMG_OFFSET_X = 500;
+const START_IMG_OFFSET_Y = 200;
+const START_IMG_DURATION = 10000;
+const START_IMG_AMP = 30;
 
 export default class Page {
   constructor (opts = {}) {
@@ -22,6 +29,7 @@ export default class Page {
     this.slide = [];
     this.book = opts.book;
 
+    this.timestamp = new Timestamp({});
     this.soundManager = new SoundManager({
       file: opts.soundFile,
       loop: opts.soundLoop,
@@ -40,9 +48,8 @@ export default class Page {
 
     this.resource = {
       title: RESOURCE_PATH + TITLE_PATH +'logo.png',
-      start: RESOURCE_PATH + TITLE_PATH +'start.png',
-      maruProf: RESOURCE_PATH + TITLE_PATH +'maru_prof.png',
-      batsuProf: RESOURCE_PATH + TITLE_PATH +'batsu_prof.png'
+      correctSuccess: RESOURCE_PATH + CORRECT_PATH +'maru.png',
+      correctFailure: RESOURCE_PATH + CORRECT_PATH +'batsu.png',
     }// end resource
 
     this.movies = {
@@ -51,7 +58,6 @@ export default class Page {
   }// end constructor
 
   drawSlide () {
-    // this.painter.clearCanvas();
     this.backGround.addBackGround(this.book, this.pageNo);
 
     switch (this.pageNo) {
@@ -124,30 +130,42 @@ export default class Page {
   }// end addMovie
 
   addStart () {
+    if (!this.timestamp.timer.length)
+      this.timestamp.addTime();
+
+    const time = this.timestamp.calcTime();
+    let v = time / START_IMG_DURATION;
+    let y;
+    v = v >= 1 ? 1 : v;
+    y = v > 0.5 ? START_IMG_AMP * 2 * (1 - v) : START_IMG_AMP * 2 * v;
+
+    this.painter.alignImage(this.resource.title, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'height'
+    });// end alignImage
     this.painter.ctx.save();
-    this.painter.ctx.globalAlpha = 0.9;
-    this.painter.alignImage(this.resource.maruProf, {
+    this.painter.ctx.translate(0, y);
+    this.painter.alignImage(this.resource.correctSuccess, {
       x: 0.5,
       y: 0.5,
       fit: 'height',
-      scale: 0.3,
-      offsetX: 300,
-      offsetY: 250
+      scale: START_IMG_SCALE,
+      offsetX: -START_IMG_OFFSET_X,
+      offsetY: START_IMG_OFFSET_Y
     });// end alignImage
-    this.painter.alignImage(this.resource.batsuProf, {
+    this.painter.alignImage(this.resource.correctFailure, {
       x: 0.5,
       y: 0.5,
       fit: 'height',
-      scale: 0.3,
-      offsetX: -300,
-      offsetY: -250
-    });// end alignImage
-    this.painter.alignImage(this.resource.start, {
-      x: 0.5,
-      y: 0.5,
-      fit: 'width'
+      scale: START_IMG_SCALE + 0.1,
+      offsetX: START_IMG_OFFSET_X,
+      offsetY: START_IMG_OFFSET_Y
     });// end alignImage
     this.painter.ctx.restore();
+
+    if (v == 1)
+      this.timestamp.removeTime();
   }// end addStart
 
   addQuestionSlide (opts = {}) {
