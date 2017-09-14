@@ -1,9 +1,4 @@
 const ALPHA = 0.8;
-const COLOR = {
-  R: 255,
-  G: 216,
-  B: 45
-}// end COLOR
 
 export default class Square {
   constructor (opts = {}) {

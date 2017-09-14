@@ -5,7 +5,9 @@ import Timestamp from './Timestamp.js';
 const RESOURCE_PATH = './images/';
 const CORRECT_PATH = 'correct/';
 const Q_NUMBERS_PATH = 'q_numbers/';
+const SOUND_PATH = './sounds/';
 
+const SLIDE_EVENT_LEN = 5;
 const TIME_LIMIT = 10000;
 const UNDER_POSITION = 300;
 // 問題番号
@@ -58,25 +60,25 @@ export default class Slide {
     this.resource = {
       correctSuccess: RESOURCE_PATH + CORRECT_PATH +'maru.png',
       correctFailure: RESOURCE_PATH + CORRECT_PATH +'batsu.png',
-      number1: RESOURCE_PATH + Q_NUMBERS_PATH +'number1.png',
-      number2: RESOURCE_PATH + Q_NUMBERS_PATH +'number2.png',
-      number3: RESOURCE_PATH + Q_NUMBERS_PATH +'number3.png',
-      number4: RESOURCE_PATH + Q_NUMBERS_PATH +'number4.png',
-      number5: RESOURCE_PATH + Q_NUMBERS_PATH +'number5.png',
-      number6: RESOURCE_PATH + Q_NUMBERS_PATH +'number6.png',
-      number7: RESOURCE_PATH + Q_NUMBERS_PATH +'number7.png',
-      number8: RESOURCE_PATH + Q_NUMBERS_PATH +'number8.png',
-      number9: RESOURCE_PATH + Q_NUMBERS_PATH +'number9.png',
-      number10: RESOURCE_PATH + Q_NUMBERS_PATH +'number10.png',
+      number1       : RESOURCE_PATH + Q_NUMBERS_PATH +'number1.png',
+      number2       : RESOURCE_PATH + Q_NUMBERS_PATH +'number2.png',
+      number3       : RESOURCE_PATH + Q_NUMBERS_PATH +'number3.png',
+      number4       : RESOURCE_PATH + Q_NUMBERS_PATH +'number4.png',
+      number5       : RESOURCE_PATH + Q_NUMBERS_PATH +'number5.png',
+      number6       : RESOURCE_PATH + Q_NUMBERS_PATH +'number6.png',
+      number7       : RESOURCE_PATH + Q_NUMBERS_PATH +'number7.png',
+      number8       : RESOURCE_PATH + Q_NUMBERS_PATH +'number8.png',
+      number9       : RESOURCE_PATH + Q_NUMBERS_PATH +'number9.png',
+      number10      : RESOURCE_PATH + Q_NUMBERS_PATH +'number10.png',
     }// end resource
 
     this.audio = {
-      numberCall: './sounds/number.mp3',
-      sentenceCall: './sounds/se_maoudamashii_system04.mp3',
-      timeCall: './sounds/se_maoudamashii_system40.mp3',
-      timeLimitCall: './sounds/se_maoudamashii_system01.mp3',
-      correctCall: './sounds/se_maoudamashii_system48.mp3',
-      descriptionCall: './sounds/se_maoudamashii_system10.mp3',
+      numberCall      : SOUND_PATH +'number.mp3',
+      sentenceCall    : SOUND_PATH +'se_maoudamashii_system04.mp3',
+      timeCall        : SOUND_PATH +'se_maoudamashii_system40.mp3',
+      timeLimitCall   : SOUND_PATH +'se_maoudamashii_system01.mp3',
+      correctCall     : SOUND_PATH +'se_maoudamashii_system48.mp3',
+      descriptionCall : SOUND_PATH +'se_maoudamashii_system10.mp3',
     }// end audio
   }// end constructor
 
@@ -222,7 +224,7 @@ export default class Slide {
   }// end addDescription
 
   progEvent () {
-    if (this.event < 5) {
+    if (this.event < SLIDE_EVENT_LEN) {
       ++this.event;
       this.timestamp.addTime();
 

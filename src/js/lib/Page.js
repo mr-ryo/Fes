@@ -10,6 +10,7 @@ const RESOURCE_PATH = './images/';
 const TITLE_PATH = 'title/';
 const CORRECT_PATH = 'correct/';
 const ENDING_PATH = 'ending/';
+const MOVIE_PATH = './movies/';
 
 const MOVIE_WIDTH = 1920;
 const MOVIE_HEIGHT = 1080;
@@ -18,6 +19,7 @@ const START_IMG_OFFSET_X = 500;
 const START_IMG_OFFSET_Y = 200;
 const START_IMG_DURATION = 10000;
 const START_IMG_AMP = 20;
+const IMG_COR = 0.1;
 
 export default class Page {
   constructor (opts = {}) {
@@ -25,7 +27,6 @@ export default class Page {
     this.width = opts.w;
     this.height = opts.h;
     this.index = 0;
-    this.bgm;
     this.mv;
     this.slide = [];
     this.book = opts.book;
@@ -48,15 +49,15 @@ export default class Page {
     });// end BackGround
 
     this.resource = {
-      title: RESOURCE_PATH + TITLE_PATH +'logo.png',
+      title         : RESOURCE_PATH + TITLE_PATH +'logo.png',
       correctSuccess: RESOURCE_PATH + CORRECT_PATH +'maru.png',
       correctFailure: RESOURCE_PATH + CORRECT_PATH +'batsu.png',
-      gameClear: RESOURCE_PATH + ENDING_PATH +'clear.png'
+      gameClear     : RESOURCE_PATH + ENDING_PATH +'clear.png'
     }// end resource
 
     this.movies = {
-      opening: './movies/test.mp4',
-      badending: './movies/test.mp4'
+      opening   : MOVIE_PATH +'test.mp4',
+      badending : MOVIE_PATH +'test.mp4'
     }// end movies
   }// end constructor
 
@@ -164,7 +165,7 @@ export default class Page {
       x: 0.5,
       y: 0.5,
       fit: 'height',
-      scale: START_IMG_SCALE + 0.1,
+      scale: START_IMG_SCALE + IMG_COR,
       offsetX: START_IMG_OFFSET_X,
       offsetY: START_IMG_OFFSET_Y
     });// end alignImage
@@ -238,7 +239,18 @@ export default class Page {
     });// end alignMovie
   }// end addBad
 
+  getIndex () {
+    return this.index;
+  }// end getIndex
+
   getEvent () {
     return this.slide[this.index].event;
   }// end getEvent
+
+  exisSlide () {
+    if (!this.slide.length)
+      return false;
+    else
+      return true;
+  }// end exisSlide
 };// end Page

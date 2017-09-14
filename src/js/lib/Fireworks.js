@@ -10,6 +10,7 @@ const GRAVITY = 1.15;
 const BALL_SIZE = 2.5;
 const LOCUS_LIMIT = 11;
 const LOCUS_COE = 0.3;
+const SEPARAT_COE = 0.6;
 const START_COLOR = {
   R: 150,
   G: 255,
@@ -141,7 +142,7 @@ export default class Fireworks {
   }// end inveParam
 
   separatColor (distance) {
-    if (distance > INITIAL_SIZE * 0.5 * 0.6)
+    if (distance > INITIAL_SIZE * 0.5 * SEPARAT_COE)
       return 'rgb('+ END_COLOR.R +','+ END_COLOR.G +','+ END_COLOR.B +')';
     else
       return 'rgb('+ START_COLOR.R +','+ START_COLOR.G +','+ START_COLOR.B +')';

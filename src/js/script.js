@@ -2,6 +2,7 @@ import Page from './lib/Page.js';
 import $ from 'jquery';
 
 const SLIDE_LEN = 10;
+const SLIDE_EVENT_LEN = 5;
 const KEY_ENTER = 13;
 const KEY_UP = 38;
 const KEY_DOWN = 40;
@@ -32,7 +33,6 @@ const resource = {
 
 const page = [];
 let index = 0;
-let bgm;
 
 const makeBook = () => {
   let file;
@@ -90,11 +90,11 @@ $(window).on('keydown', (e) => {
   let code = 0;
 
   if (e.keyCode == KEY_ENTER) {
-    if (!page[index].slide.length)
+    if (!page[index].exisSlide())
       code = KEY_NEXT;
-    else if (page[index].getEvent() < 5)
+    else if (page[index].getEvent() < SLIDE_EVENT_LEN)
       code = KEY_RIGHT;
-    else if (page[index].index < page[index].slide.length - 1)
+    else if (page[index].getIndex() < SLIDE_LEN - 1)
       code = KEY_DOWN;
     else
       code = KEY_NEXT;

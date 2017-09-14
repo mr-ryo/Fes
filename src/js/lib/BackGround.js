@@ -14,11 +14,41 @@ const PARTICLE_LIMIT = 10;
 const ROW_LINES = 10;
 const COL_LINES = 10;
 const LINE_WIDTH = 2;
-const BG_COLOR = {
+const TITLE_COLOR = {
+  R: 0,
+  G: 0,
+  B: 0
+}// end TITLE_COLOR
+const MOVIE_COLOR = {
+  R: 0,
+  G: 0,
+  B: 0
+}// end MOVIE_COLOR
+const START_COLOR = {
+  R: 50,
+  G: 0,
+  B: 0
+}// end START_COLOR
+const QUIZ_COLOR = {
   R: 0,
   G: 100,
   B: 100
 }// end BG_COLOR
+const ENDING_COLOR = {
+  R: 0,
+  G: 0,
+  B: 50
+}// end START_COLOR
+const START_PARTICLE_COLOR = {
+  R: 255,
+  G: 200,
+  B: 50
+}// end START_PARTICLE_COLOR
+const QUIZ_PARTICLE_COLOR = {
+  R: 255,
+  G: 216,
+  B: 45
+}// end QUIZ_PARTICLE_COLOR
 
 export default class BackGround {
   constructor (opts = {}) {
@@ -32,9 +62,9 @@ export default class BackGround {
       b: 0
     }// end color
     this.target = {
-      r: BG_COLOR.R,
-      g: BG_COLOR.G,
-      b: BG_COLOR.B
+      r: QUIZ_COLOR.R,
+      g: QUIZ_COLOR.G,
+      b: QUIZ_COLOR.B
     }// end target
 
     this.painter = new Painter({
@@ -49,26 +79,26 @@ export default class BackGround {
       case book.TITLE:
         if (!this.elements.length)
           this.gridExpand();
-        this.paintBackGround(this.color, {r:0,g:0,b:0});
+        this.paintBackGround(this.color, {r: TITLE_COLOR.R, g: TITLE_COLOR.G, b: TITLE_COLOR.B});
         this.gridMove();
         break;
       case book.MOVIE:
-        this.paintBackGround(this.color, {r:0,g:0,b:0});
+        this.paintBackGround(this.color, {r: MOVIE_COLOR.R, g: MOVIE_COLOR.G, b: MOVIE_COLOR.B});
         break;
       case book.START:
-        this.paintBackGround(this.color, {r:50,g:0,b:0});
-        this.particleExpand({r: 255, g: 200, b: 50});
+        this.paintBackGround(this.color, {r: START_COLOR.R, g: START_COLOR.G, b: START_COLOR.B});
+        this.particleExpand({r: START_PARTICLE_COLOR.R, g: START_PARTICLE_COLOR.G, b: START_PARTICLE_COLOR.B});
         break;
       case book.QUIZ:
         this.paintBackGround(this.color, this.target);
-        this.particleExpand({r: 255, g: 216, b: 45});
+        this.particleExpand({r: QUIZ_PARTICLE_COLOR.R, g: QUIZ_PARTICLE_COLOR.G, b: QUIZ_PARTICLE_COLOR.B});
         break;
       case book.ENDING:
-        this.paintBackGround(this.color, {r:0,g:0,b:50});
+        this.paintBackGround(this.color, {r: ENDING_COLOR.R, g: ENDING_COLOR.G, b: ENDING_COLOR.B});
         this.fireworksExpand();
         break;
       case book.BAD:
-        this.paintBackGround(this.color, {r:0,g:0,b:0});
+        this.paintBackGround(this.color, {r: MOVIE_COLOR.R, g: MOVIE_COLOR.G, b: MOVIE_COLOR.B});
         break;
       default:
         break;
