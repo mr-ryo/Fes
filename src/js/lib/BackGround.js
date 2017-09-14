@@ -67,6 +67,9 @@ export default class BackGround {
         this.paintBackGround(this.color, {r:0,g:0,b:50});
         this.fireworksExpand();
         break;
+      case book.BAD:
+        this.paintBackGround(this.color, {r:0,g:0,b:0});
+        break;
       default:
         break;
     }// end switch

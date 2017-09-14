@@ -2,6 +2,7 @@ import Page from './lib/Page.js';
 import $ from 'jquery';
 
 const SLIDE_LEN = 10;
+const KEY_ENTER = 13;
 const KEY_UP = 38;
 const KEY_DOWN = 40;
 const KEY_LEFT = 37;
@@ -18,7 +19,8 @@ const BOOK = {
   MOVIE: 1,
   START: 2,
   QUIZ: 3,
-  ENDING: 4
+  ENDING: 4,
+  BAD: 5
 }// end BOOK
 
 const resource = {
@@ -85,7 +87,22 @@ page[index].soundManager.play();
 masterDraw();
 
 $(window).on('keydown', (e) => {
-  switch (e.keyCode) {
+  let code = 0;
+
+  if (e.keyCode == KEY_ENTER) {
+    if (!page[index].slide.length)
+      code = KEY_NEXT;
+    else if (page[index].getEvent() < 5)
+      code = KEY_RIGHT;
+    else if (page[index].index < page[index].slide.length - 1)
+      code = KEY_DOWN;
+    else
+      code = KEY_NEXT;
+  } else {
+    code = e.keyCode;
+  }// end if
+
+  switch (code) {
     case KEY_BACK:
       if (index > 0) {
         page[index].soundManager.pause();

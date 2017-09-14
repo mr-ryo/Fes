@@ -55,7 +55,8 @@ export default class Page {
     }// end resource
 
     this.movies = {
-      opening: './movies/OP.mp4'
+      opening: './movies/test.mp4',
+      badending: './movies/test.mp4'
     }// end movies
   }// end constructor
 
@@ -77,6 +78,9 @@ export default class Page {
         break;
       case this.book.ENDING:
         this.addEnding();
+        break;
+      case this.book.BAD:
+        this.addBad();
         break;
       default:
         break;
@@ -216,4 +220,25 @@ export default class Page {
       fit: 'width'
     });// end alignImage
   }// end addEnding
+
+  addBad () {
+    if (this.mv == null) {
+      const movie = document.createElement('video');
+      movie.src = this.movies.badending;
+      movie.width = MOVIE_WIDTH;
+      movie.height = MOVIE_HEIGHT;
+      this.mv = movie;
+      this.mv.play();
+    }// end if
+
+    this.painter.alignMovie(this.mv, {
+      x: 0.5,
+      y: 0.5,
+      fit: 'width'
+    });// end alignMovie
+  }// end addBad
+
+  getEvent () {
+    return this.slide[this.index].event;
+  }// end getEvent
 };// end Page
