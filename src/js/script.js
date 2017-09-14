@@ -55,7 +55,7 @@ const makeBook = () => {
     }// end switch
 
     page.push(new Page({
-      canvas: $('.canvas').get(0),
+      canvas: $('#js-canvas').get(0),
       num: BOOK[key],
       w: DISP_WIDTH,
       h: DISP_HEIGHT,
