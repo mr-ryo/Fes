@@ -6,7 +6,7 @@ const RESOURCE_PATH = './images/';
 const CORRECT_PATH = 'correct/';
 const Q_NUMBERS_PATH = 'q_numbers/';
 
-const TIME_LIMIT = 15000;
+const TIME_LIMIT = 10000;
 const UNDER_POSITION = 300;
 // 問題番号
 const NUMBER_DURATION = 300;
