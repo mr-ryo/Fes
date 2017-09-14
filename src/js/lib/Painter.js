@@ -1,4 +1,4 @@
-const RESOURCE_PATH = '../images/';
+const RESOURCE_PATH = './images/';
 const COMMON_PATH = 'common/';
 const NUMBERS_PATH = 'numbers/';
 const ALPHABETS_PATH = 'alphabets/';

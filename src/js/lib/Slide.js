@@ -2,7 +2,7 @@ import SoundManager from './SoundManager.js';
 import Question from './Question.js';
 import Timestamp from './Timestamp.js';
 
-const RESOURCE_PATH = '../images/';
+const RESOURCE_PATH = './images/';
 const CORRECT_PATH = 'correct/';
 const Q_NUMBERS_PATH = 'q_numbers/';
 

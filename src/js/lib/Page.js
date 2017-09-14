@@ -6,7 +6,7 @@ import Painter from './Painter.js';
 import BackGround from './BackGround.js';
 import Slide from './Slide.js';
 
-const RESOURCE_PATH = '../images/';
+const RESOURCE_PATH = './images/';
 const TITLE_PATH = 'title/';
 const CORRECT_PATH = 'correct/';
 const ENDING_PATH = 'ending/';
@@ -55,7 +55,7 @@ export default class Page {
     }// end resource
 
     this.movies = {
-      opening: '../movies/test.mp4'
+      opening: './movies/OP.mp4'
     }// end movies
   }// end constructor
 
