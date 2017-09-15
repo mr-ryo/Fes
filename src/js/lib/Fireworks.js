@@ -11,16 +11,6 @@ const BALL_SIZE = 2.5;
 const LOCUS_LIMIT = 11;
 const LOCUS_COE = 0.3;
 const SEPARAT_COE = 0.6;
-const START_COLOR = {
-  R: 150,
-  G: 255,
-  B: 255
-}// end START_COLOR
-const END_COLOR = {
-  R: 255,
-  G: 200,
-  B: 200
-}// end END_COLOR
 
 export default class Fireworks {
 
@@ -28,6 +18,8 @@ export default class Fireworks {
     this.x = opts.x; // x座標
     this.y = opts.y; // y座標
     this.volume = opts.volume; // 花火を形成する玉の個数
+    this.color1 = opts.color1;
+    this.color2 = opts.color2;
     this.balls = [];// 花火を形成する玉の入れ物
     this.flg = false;
 
@@ -143,9 +135,9 @@ export default class Fireworks {
 
   separatColor (distance) {
     if (distance > INITIAL_SIZE * 0.5 * SEPARAT_COE)
-      return 'rgb('+ END_COLOR.R +','+ END_COLOR.G +','+ END_COLOR.B +')';
+      return 'rgb('+ this.color1.r +','+ this.color1.g +','+ this.color1.b +')';
     else
-      return 'rgb('+ START_COLOR.R +','+ START_COLOR.G +','+ START_COLOR.B +')';
+      return 'rgb('+ this.color2.r +','+ this.color2.g +','+ this.color2.b +')';
   }// end separatColor
 
   getNotice () {

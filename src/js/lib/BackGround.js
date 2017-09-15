@@ -49,6 +49,43 @@ const QUIZ_PARTICLE_COLOR = {
   G: 216,
   B: 45
 }// end QUIZ_PARTICLE_COLOR
+const FIREWORKS_COLORS = [
+  {
+    R: 150,
+    G: 255,
+    B: 255
+  },
+  {
+    R: 255,
+    G: 200,
+    B: 200
+  },
+  {
+    R: 200,
+    G: 255,
+    B: 200
+  },
+  {
+    R: 255,
+    G: 255,
+    B: 100,
+  },
+  {
+    R: 255,
+    G: 100,
+    B: 100
+  },
+  {
+    R: 100,
+    G: 255,
+    B: 100
+  },
+  {
+    R: 255,
+    G: 200,
+    B: 50
+  },
+];
 
 export default class BackGround {
   constructor (opts = {}) {
@@ -129,10 +166,15 @@ export default class BackGround {
     if (!birth && this.elements.length < FIREWORKS_LIMIT) {
       const x = Math.floor(Math.random() * this.w);
       const y = Math.floor(Math.random() * this.h);
+      const rand1 = Math.floor(Math.random() * FIREWORKS_COLORS.length);
+      const rand2 = Math.floor(Math.random() * FIREWORKS_COLORS.length);
+
       this.elements.push(new Fireworks({
         x: x,
         y: y,
         volume: FIREWORKS_VOLUME,
+        color1: {r: FIREWORKS_COLORS[rand1].R, g: FIREWORKS_COLORS[rand1].G, b: FIREWORKS_COLORS[rand1].B},
+        color2: {r: FIREWORKS_COLORS[rand2].R, g: FIREWORKS_COLORS[rand2].G, b: FIREWORKS_COLORS[rand2].B},
         painter: this.painter
       }));// end push
     }// end if
