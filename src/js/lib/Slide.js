@@ -76,7 +76,7 @@ export default class Slide {
       numberCall      : SOUND_PATH +'number.mp3',
       sentenceCall    : SOUND_PATH +'se_maoudamashii_system04.mp3',
       timeCall        : SOUND_PATH +'se_maoudamashii_system40.mp3',
-      timeLimitCall   : SOUND_PATH +'se_maoudamashii_system01.mp3',
+      timeLimitCall   : SOUND_PATH +'se_maoudamashii_system27.mp3',
       correctCall     : SOUND_PATH +'se_maoudamashii_system48.mp3',
       descriptionCall : SOUND_PATH +'se_maoudamashii_system10.mp3',
     }// end audio
