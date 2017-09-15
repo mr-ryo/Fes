@@ -26,15 +26,23 @@ export default class Painter {
       number8 : RESOURCE_PATH + NUMBERS_PATH +'number8.png',
       number9 : RESOURCE_PATH + NUMBERS_PATH +'number9.png'
     }// end resource
+
+    this.convertResource();
   }// end constructor
+
+  convertResource () {
+    for (const key in this.resource) {
+      const image = new Image();
+      image.src = this.resource[key];
+      this.resource[key] = image;
+    }// end for
+  }// end convertResource
 
   clearCanvas () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }// end clearCanvas
 
   alignImage (img, opts = {}) {
-    const image = new Image();
-    image.src = img;
     const scale = isNaN(opts.scale) ? 1 : opts.scale;
     const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
     const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
@@ -46,15 +54,15 @@ export default class Painter {
     switch (opts.fit) {
       case 'width':
         drawWidth = this.canvas.width;
-        drawHeight = this.canvas.width * (image.height / image.width);
+        drawHeight = this.canvas.width * (img.height / img.width);
         break;
       case 'height':
-        drawWidth = this.canvas.height * (image.width / image.height);
+        drawWidth = this.canvas.height * (img.width / img.height);
         drawHeight = this.canvas.height;
         break;
       default:
-        drawWidth = image.width;
-        drawHeight = image.height;
+        drawWidth = img.width;
+        drawHeight = img.height;
         break;
     }// end switch
 
@@ -64,7 +72,7 @@ export default class Painter {
     y = offsetY + (this.canvas.height - drawHeight) * y;
 
     this.ctx.drawImage(
-      image,
+      img,
       x,
       y,
       drawWidth,
@@ -73,8 +81,6 @@ export default class Painter {
   }// end alignImage
 
   sharpImage (img, opts = {}) {
-    const image = new Image();
-    image.src = img;
     const offsetX = isNaN(opts.offsetX) ? 0 : opts.offsetX;
     const offsetY = isNaN(opts.offsetY) ? 0 : opts.offsetY;
     let w = isNaN(opts.w) ? 0 : opts.w;
@@ -85,15 +91,15 @@ export default class Painter {
     switch (opts.basisSize) {
       case 'width':
         drawWidth = w;
-        drawHeight = w * (image.height / image.width);
+        drawHeight = w * (img.height / img.width);
         break;
       case 'height':
-        drawWidth = h * (image.width / image.height);
+        drawWidth = h * (img.width / img.height);
         drawHeight = h;
         break;
       default:
-        drawWidth = image.width;
-        drawHeight = image.height;
+        drawWidth = img.width;
+        drawHeight = img.height;
         break;
     }// end switch
 
@@ -101,7 +107,7 @@ export default class Painter {
     let y = offsetY + (opts.basisY == 'top' ? 0 : this.canvas.height - drawHeight);
 
     this.ctx.drawImage(
-      image,
+      img,
       x,
       y,
       drawWidth,

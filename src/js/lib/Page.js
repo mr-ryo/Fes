@@ -8,6 +8,9 @@ import Slide from './Slide.js';
 
 const RESOURCE_PATH = './images/';
 const TITLE_PATH = 'title/';
+const SENTENCE_PATH = 'sentence/';
+const REFERENCE_PATH = 'reference/';
+const DESCRIPTION_PATH = 'description/';
 const CORRECT_PATH = 'correct/';
 const ENDING_PATH = 'ending/';
 const MOVIE_PATH = './movies/';
@@ -59,7 +62,17 @@ export default class Page {
       opening   : MOVIE_PATH +'test.mp4',
       badending : MOVIE_PATH +'test.mp4'
     }// end movies
+
+    this.convertResource();
   }// end constructor
+
+  convertResource () {
+    for (const key in this.resource) {
+      const image = new Image();
+      image.src = this.resource[key];
+      this.resource[key] = image;
+    }// end for
+  }// end convertResource
 
   drawSlide () {
     this.backGround.addBackGround(this.book, this.pageNo);
@@ -179,6 +192,8 @@ export default class Page {
     const question_stack = [];
     const json_len = Object.keys(json).length;
     const size = isNaN(opts.size) ? 0 : opts.size;
+    let sentenceImg;
+    let descriptionImg;
     let rand;
     let flg;
 
@@ -204,12 +219,14 @@ export default class Page {
       }// end while
 
       question_stack.push(rand);
+      sentenceImg = json[rand]['Q_I'] != '' ? RESOURCE_PATH + REFERENCE_PATH + json[rand]['Q_I'] : '';
+      descriptionImg = json[rand]['D_I'] != '' ? RESOURCE_PATH + REFERENCE_PATH + json[rand]['D_I'] : '';
       this.slide[i].addQuestion({
-        q: json[rand]['Q'],
+        q: RESOURCE_PATH + SENTENCE_PATH + json[rand]['Q'],
         a: json[rand]['A'],
-        d: json[rand]['D'],
-        img1: json[rand]['Q_I'],
-        img2: json[rand]['D_I']
+        d: RESOURCE_PATH + DESCRIPTION_PATH + json[rand]['D'],
+        img1: sentenceImg,
+        img2: descriptionImg
       });// end addQuestion
     }// end for
   }// end addQuestionSlide

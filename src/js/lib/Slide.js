@@ -80,7 +80,17 @@ export default class Slide {
       correctCall     : SOUND_PATH +'se_maoudamashii_system48.mp3',
       descriptionCall : SOUND_PATH +'se_maoudamashii_system10.mp3',
     }// end audio
+
+    this.convertResource();
   }// end constructor
+
+  convertResource () {
+    for (const key in this.resource) {
+      const image = new Image();
+      image.src = this.resource[key];
+      this.resource[key] = image;
+    }// end for
+  }// end convertResource
 
   addQuestion (opts = {}) {
     this.question = new Question({
@@ -131,8 +141,8 @@ export default class Slide {
     this.painter.ctx.save();
     this.painter.ctx.globalAlpha = v;
 
-    if (this.question.sentenceRefImage != '') {
-      this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.sentenceRefImage, {
+    if (this.question.getResource('sentenceRefImage') != '') {
+      this.painter.alignImage(this.question.getResource('sentenceRefImage'), {
         x: 0.5,
         y: 0.5,
         fit: 'height',
@@ -141,7 +151,7 @@ export default class Slide {
       offsetY = UNDER_POSITION;
     }// end if
 
-    this.painter.alignImage(RESOURCE_PATH +'sentence/'+ this.question.sentence, {
+    this.painter.alignImage(this.question.getResource('sentence'), {
       x: 0.5,
       y: 0.5,
       fit: 'width',
@@ -203,8 +213,8 @@ export default class Slide {
     this.painter.ctx.save();
     this.painter.ctx.globalAlpha = v;
 
-    if (this.question.descriptionRefImage != '') {
-      this.painter.alignImage(RESOURCE_PATH +'reference/'+ this.question.descriptionRefImage, {
+    if (this.question.getResource('descriptionRefImage') != '') {
+      this.painter.alignImage(this.question.getResource('descriptionRefImage'), {
         x: 0.5,
         y: 0.5,
         fit: 'height',
@@ -213,7 +223,7 @@ export default class Slide {
       });// end alignImage
     }// end if
 
-    this.painter.alignImage(RESOURCE_PATH +'description/'+ this.question.description, {
+    this.painter.alignImage(this.question.getResource('description'), {
       x: 0.5,
       y: 0.5,
       fit: 'width',
