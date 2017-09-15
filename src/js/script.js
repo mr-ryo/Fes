@@ -25,9 +25,9 @@ const BOOK = {
 }// end BOOK
 
 const resource = {
-  bgm_title: './sounds/bgm_maoudamashii_fantasy13.mp3',
-  bgm_start: './sounds/bgm_maoudamashii_fantasy02.mp3',
-  bgm_quiz: './sounds/game_maoudamashii_1_battle36.mp3',
+  bgm_title : './sounds/bgm_maoudamashii_fantasy13.mp3',
+  bgm_start : './sounds/bgm_maoudamashii_fantasy02.mp3',
+  bgm_quiz  : './sounds/game_maoudamashii_1_battle36.mp3',
   bgm_ending: './sounds/bgm_maoudamashii_fantasy10.mp3'
 }// end resource
 
