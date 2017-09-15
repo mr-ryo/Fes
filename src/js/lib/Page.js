@@ -17,12 +17,14 @@ const MOVIE_PATH = './movies/';
 
 const MOVIE_WIDTH = 1920;
 const MOVIE_HEIGHT = 1080;
+const START_DURATION = 1000;
 const START_IMG_SCALE = 0.5;
 const START_IMG_OFFSET_X = 500;
 const START_IMG_OFFSET_Y = 200;
 const START_IMG_DURATION = 10000;
 const START_IMG_AMP = 20;
 const IMG_COR = 0.1;
+const ENDING_DURATION = 1000;
 
 export default class Page {
   constructor (opts = {}) {
@@ -152,19 +154,25 @@ export default class Page {
   addStart () {
     if (!this.timestamp.timer.length)
       this.timestamp.addTime();
+    if (this.timestamp.timer.length == 1)
+      this.timestamp.addTime();
 
-    const time = this.timestamp.calcTime();
-    let v = time / START_IMG_DURATION;
+    const time1 = this.timestamp.calcTime();
+    const time2 = this.timestamp.calcTime(this.timestamp.timer[1]);
+    let v1 = time1 / START_DURATION;
+    let v2 = time2 / START_IMG_DURATION;
     let y;
-    v = v >= 1 ? 1 : v;
-    y = v > 0.5 ? START_IMG_AMP * 2 * (1 - v) : START_IMG_AMP * 2 * v;
+    v1 = v1 >= 1 ? 1 : v1;
+    v2 = v2 >= 1 ? 1 : v2;
+    y = v2 > 0.5 ? START_IMG_AMP * 2 * (1 - v2) : START_IMG_AMP * 2 * v2;
 
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v1;
     this.painter.alignImage(this.resource.title, {
       x: 0.5,
       y: 0.5,
       fit: 'height'
     });// end alignImage
-    this.painter.ctx.save();
     this.painter.ctx.translate(0, y);
     this.painter.alignImage(this.resource.correctSuccess, {
       x: 0.5,
@@ -184,7 +192,7 @@ export default class Page {
     });// end alignImage
     this.painter.ctx.restore();
 
-    if (v == 1)
+    if (v2 == 1)
       this.timestamp.removeTime();
   }// end addStart
 
@@ -232,11 +240,20 @@ export default class Page {
   }// end addQuestionSlide
 
   addEnding () {
+    if (!this.timestamp.timer.length)
+      this.timestamp.addTime();
+
+    const time = this.timestamp.calcTime();
+    const v = time / ENDING_DURATION;
+
+    this.painter.ctx.save();
+    this.painter.ctx.globalAlpha = v;
     this.painter.alignImage(this.resource.gameClear, {
       x: 0.5,
       y: 0.5,
       fit: 'width'
     });// end alignImage
+    this.painter.ctx.restore();
   }// end addEnding
 
   addBad () {
